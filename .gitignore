@@ -11,3 +11,11 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+venv/
+
+__pycache__/
+
+
+# Игнорируем все файлы и папки, начинающиеся с точки (кроме .git)
+/.
+/.gitignore
