@@ -1,3 +1,4 @@
 .gitignore
 /111111.txt
-/venv
+venv/
+__pycache__/
