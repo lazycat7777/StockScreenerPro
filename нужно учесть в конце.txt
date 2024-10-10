@@ -1,0 +1,11 @@
+./required_libraries/TA_Lib-0.4.29-cp312-cp312-win_amd64.whl
+так пишем в requirements.txt
+
+1111
+111
+11
+1
+2222
+333
+в
+111
