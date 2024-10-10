@@ -1,7 +1,7 @@
 
 
-/111111.txt
-
+/list_of_commands.md
+/list_of_commands_2.md
 
 # Environments
 .env
@@ -11,6 +11,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+/venv
+venv
 venv/
 
 __pycache__/
