@@ -1,7 +1,7 @@
 ARG BASE_IMAGE=ubuntu:24.04
 FROM ${BASE_IMAGE}
 
-LABEL org.opencontainers.image.authors="lazycat7777 https://github.com/lazycat7777"
+LABEL org.opencontainers.image.authors = "lazycat7777 https://github.com/lazycat7777"
 LABEL org.opencontainers.image.source = "https://github.com/lazycat7777/screener_website"
 
 ENV APT_PKG_TEMPORARY="build-essential autoconf automake autotools-dev cmake python3-dev python3-venv"
@@ -39,20 +39,29 @@ RUN apt-get update && apt-get upgrade -y && \
 # USER "root"
 # # WORKDIR "/tmp"
 
+
+# RUN apt-get update && apt-get install -y python3.12-venv
+# RUN python3 -m venv /ctr-py-venv
+
 WORKDIR /app
 EXPOSE 18080
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONDONUNBUFFERED 1
 
-
-
-
-RUN pip install --upgrade pip
-RUN pip install --upgrade setuptools
+# RUN pip install --upgrade pip
+# RUN pip install --upgrade setuptools
 COPY ./requirements.txt ./
-RUN pip install -r requirements.txt
+
+RUN apt-get update && \
+    apt-get install -y python3.12-venv && \
+    python3 -m venv /ctr-py-venv && \
+    /ctr-py-venv/bin/pip install -r requirements.txt
+
 COPY . .
+
+# RUN apt-get update && apt-get install -y python3.12-venv && python3 -m venv /ctr-py-venv && /ctr-py-venv/bin/pip install -r requirements.txt
+
 
 
 
@@ -60,3 +69,43 @@ COPY . .
 
 
 
+
+
+# ARG BASE_IMAGE=python:3.12-slim
+# FROM ${BASE_IMAGE}
+
+# LABEL org.opencontainers.image.authors = "lazycat7777 https://github.com/lazycat7777"
+# LABEL org.opencontainers.image.source = "https://github.com/lazycat7777/screener_website"
+
+# ENV DEBIAN_FRONTEND=noninteractive
+
+# COPY ta-lib ./ta-lib
+
+# RUN apt-get update && apt-get upgrade -y && \
+#     apt-get install -y ${APT_PKG_TEMPORARY} ${APT_PKG} && \
+#     ln -s /usr/include/locale.h /usr/include/xlocale.h && \
+#     \
+#     # compile TA-Lib library
+#     cd ta-lib && \
+#     ./configure --prefix=/usr; \
+#     make && \
+#     make install && \
+#     cd .. && \
+#     rm -rf ta-lib && \
+#     \
+#     # Clean up
+#     apt-get autoremove -y ${APT_PKG_TEMPORARY} && \
+#     rm -rf /var/lib/apt/lists/*
+
+
+# WORKDIR /app
+# EXPOSE 18080
+
+# ENV PYTHONDONTWRITEBYTECODE 1
+# ENV PYTHONDONUNBUFFERED 1
+
+# RUN pip install --upgrade pip
+# RUN pip install --upgrade setuptools
+# COPY ./requirements.txt ./
+# RUN pip install -r requirements.txt
+# COPY . .
