@@ -15,7 +15,8 @@ services:
     environment:
       - DEBIAN_FRONTEND=noninteractive  # Установить режим установки пакетов без пользовательского взаимодействия
     # command: python3 --version
-
+    command: >
+      sh -c "source /venv/bin/activate && pip freeze > 11111111.txt"
 
 
 # # version: "3.12"
