@@ -1,4 +1,6 @@
-from symbols_and_exchanges_main import result_parser_of_symbols
+# from symbols_and_exchanges_main import result_parser_of_symbols
+from .models import StockData
+from django.db import transaction
 from tvDatafeed import TvDatafeed, Interval
 import talib
 import pandas as pd
@@ -136,6 +138,9 @@ def calculate_and_aggregate_results():
 
     # final_table.to_sql('stock_data', conn, if_exists='replace', index=False)
 
+    with transaction.atomic():
+        StockData.objects.bulk_create([StockData(**row) for row in results])
+
     return final_table
 
 
@@ -143,6 +148,6 @@ def calculate_and_aggregate_results():
 
 # calculate_and_aggregate_results()
 
-print(calculate_and_aggregate_results())
+# print(calculate_and_aggregate_results())
 
 
