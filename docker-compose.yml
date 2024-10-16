@@ -2,7 +2,7 @@
 
 services:
   webapp:
-    restart: always
+    # restart: always
     container_name: webapp
     build: ./  # Путь к Dockerfile (текущая директория)
     ports:
@@ -10,15 +10,35 @@ services:
     volumes:
       - ./:/app  # Монтировать текущую директорию проекта в /app внутри контейнера
       - ./static:/app/static
-    # env_file:
-    #   - ./.env
-    environment:
-      - DEBIAN_FRONTEND=noninteractive  # Установить режим установки пакетов без пользовательского взаимодействия
-    # command: python3 --version
-    command: >
-      sh -c "source /venv/bin/activate && pip freeze > 11111111.txt"
+    env_file:
+      - ./.env
+    command: bash entrypoint.sh
+    depends_on:
+      - database
+    networks:
+      - webapp_network
 
+  database:
+    image: postgres:17
+    container_name: postgre
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./.env
+    ports:
+      - 5432:5432
+    networks:
+      - webapp_network
 
+volumes:
+  postgres_data:
+
+networks:
+  webapp_network:
+
+# pip install django-extensions
+# bash -c "source /venv/bin/activate && python manage.py runserver 0.0.0.0:18080"
+# bash -c "source /venv/bin/activate && pip freeze > requirements.txt"
 # # version: "3.12"
 
 # services:

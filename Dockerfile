@@ -39,4 +39,7 @@ RUN bash -c "source /venv/bin/activate && pip install --upgrade pip" && \
     apt-get autoremove -y ${APT_PKG_TEMPORARY} && \
     rm -rf /var/lib/apt/lists/*
 
+# postgresql
+RUN apt-get update && apt-get install -y postgresql-client libpq-dev
+
 COPY . .
