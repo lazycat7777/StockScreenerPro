@@ -1,14 +1,12 @@
-# version: '3.8'  # Укажите версию формата docker-compose
 
 services:
   webapp:
-    # restart: always
     container_name: webapp
-    build: ./  # Путь к Dockerfile (текущая директория)
+    build: ./  
     ports:
-      - "18080:18080"  # Отобразить порт контейнера 18080 на хост-машине (порт 80)
+      - "18080:18080"  
     volumes:
-      - ./:/app  # Монтировать текущую директорию проекта в /app внутри контейнера
+      - ./:/app  
       - ./static:/app/static
     env_file:
       - ./.env
