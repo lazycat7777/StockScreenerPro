@@ -38,6 +38,31 @@ services:
     networks:
       - webapp_network
 
+  worker:
+    build: ./  
+    hostname: worker
+    volumes:
+      - ./:/app
+    env_file:
+      - ./.env
+    depends_on:
+      - redis
+      - webapp
+      - database
+    command: >
+      sh -c "source /ctr-py-venv/bin/activate &&
+      celery -A screener_website worker --loglevel=info"
+    networks:
+      - webapp_network
+
+  redis:
+    image: redis
+    hostname: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - webapp_network
+
 volumes:
   postgres_data:
 

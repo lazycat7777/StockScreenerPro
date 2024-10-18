@@ -163,3 +163,10 @@ MEDIA_ROOT = BASE_DIR / 'images'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DATABASE_ROUTERS = ['screener_daily_USA.router.AppRouter',]
+
+# redis
+REDIS_HOST = 'redis'
+REDIS_PORT = '6379'
+
+# celery
+CELERY_BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
