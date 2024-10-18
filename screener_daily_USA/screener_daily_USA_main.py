@@ -56,7 +56,6 @@ def get_new_data(symbol, exchange, interval):
 
 
 def calculate_indicators(data):
-
     # ADR%
     data['range'] = data['high'] - data['low']
     adr_percent = 100 * (data['range'] / data['low']).rolling(window=20).mean().iloc[-1] 
@@ -84,15 +83,11 @@ def calculate_indicators(data):
     }
 
 
-
-
-
-
 def calculate_and_aggregate_results():
 
     results = []
 
-    # Общая таблица для всех индикаторов
+    # Общая таблица
     final_table = pd.DataFrame(columns=[
         'Symbol', 
         'Exchange', 
@@ -136,18 +131,31 @@ def calculate_and_aggregate_results():
         final_table = pd.concat([final_table, pd.DataFrame(results)], ignore_index=True)
         results = []  # очищаем список для новых результатов
 
-    # final_table.to_sql('stock_data', conn, if_exists='replace', index=False)
+    # Очистка таблицы в базе данных перед сохранением новых данных
+    StockData.objects.all().delete()
 
+    # Сохраняем данные в одном транзакционном блоке
     with transaction.atomic():
-        StockData.objects.bulk_create([StockData(**row) for row in results])
+        final_table_in_db = [
+            StockData(
+                symbol=vals['Symbol'], 
+                exchange=vals['Exchange'], 
+                price=vals['Price'], 
+                ADR_percent=vals['ADR_percent'], 
+                SMA_10=vals['SMA_10'], 
+                SMA_20=vals['SMA_20'], 
+                SMA_50=vals['SMA_50'], 
+                SMA_100=vals['SMA_100'], 
+                SMA_150=vals['SMA_150'], 
+                SMA_200=vals['SMA_200'], 
+                ema=vals['EMA'], 
+                rsi=vals['RSI']
+            ) for vals in final_table.to_dict(orient='records')
+        ]
+        
+        # Сохраняем все данные в базе данных
+        StockData.objects.bulk_create(final_table_in_db)
 
     return final_table
-
-
-
-
-# calculate_and_aggregate_results()
-
-# print(calculate_and_aggregate_results())
 
 
