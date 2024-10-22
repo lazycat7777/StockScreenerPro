@@ -1,4 +1,4 @@
-# from symbols_and_exchanges_main import result_parser_of_symbols
+from .symbols_and_exchanges_main import result_parser_of_symbols
 from .models import StockData
 from django.db import transaction
 from tvDatafeed import TvDatafeed, Interval
@@ -13,6 +13,9 @@ pd.options.mode.chained_assignment = None
 # symbols_and_exchanges = result_parser_of_symbols
 
 symbols_and_exchanges = [
+    ('BKNG', 'NASDAQ'),
+    ('MELI', 'NASDAQ'),
+    ('ORLY', 'NASDAQ'),
     ('REAX', 'NASDAQ'),
     ('AAPL', 'NASDAQ'),
     ('GOOGL', 'NASDAQ'),
@@ -113,16 +116,16 @@ def calculate_and_aggregate_results():
             results.append({
                 'Symbol': symbol,
                 'Exchange': exchange,
-                'Price': f"{indicators_dict['Price']:,.2f}",
-                'ADR_percent': f"{indicators_dict['ADR_percent']:,.2f}",
-                'SMA_10': f"{indicators_dict['SMA_10']:,.2f}",
-                'SMA_20': f"{indicators_dict['SMA_20']:,.2f}",
-                'SMA_50': f"{indicators_dict['SMA_50']:,.2f}",
-                'SMA_100': f"{indicators_dict['SMA_100']:,.2f}",
-                'SMA_150': f"{indicators_dict['SMA_150']:,.2f}",
-                'SMA_200': f"{indicators_dict['SMA_200']:,.2f}",
-                'EMA': f"{indicators_dict['EMA']:,.2f}",
-                'RSI': f"{indicators_dict['RSI']:,.2f}"
+                'Price': indicators_dict['Price'],
+                'ADR_percent': indicators_dict['ADR_percent'],
+                'SMA_10': indicators_dict['SMA_10'],
+                'SMA_20': indicators_dict['SMA_20'],
+                'SMA_50': indicators_dict['SMA_50'],
+                'SMA_100': indicators_dict['SMA_100'],
+                'SMA_150': indicators_dict['SMA_150'],
+                'SMA_200': indicators_dict['SMA_200'],
+                'EMA': indicators_dict['EMA'],
+                'RSI': indicators_dict['RSI'] 
             })
 
     # После завершения цикла добавляем все результаты в таблицу
@@ -140,16 +143,16 @@ def calculate_and_aggregate_results():
             StockData(
                 symbol=vals['Symbol'], 
                 exchange=vals['Exchange'], 
-                price=vals['Price'], 
-                ADR_percent=vals['ADR_percent'], 
-                SMA_10=vals['SMA_10'], 
-                SMA_20=vals['SMA_20'], 
-                SMA_50=vals['SMA_50'], 
-                SMA_100=vals['SMA_100'], 
-                SMA_150=vals['SMA_150'], 
-                SMA_200=vals['SMA_200'], 
-                ema=vals['EMA'], 
-                rsi=vals['RSI']
+                price=round(float(str(vals['Price']).replace(',', '')), 2),
+                ADR_percent=round(float(str(vals['ADR_percent']).replace(',', '')), 2),
+                SMA_10=round(float(str(vals['SMA_10']).replace(',', '')), 2),
+                SMA_20=round(float(str(vals['SMA_20']).replace(',', '')), 2),
+                SMA_50=round(float(str(vals['SMA_50']).replace(',', '')), 2),
+                SMA_100=round(float(str(vals['SMA_100']).replace(',', '')), 2),
+                SMA_150=round(float(str(vals['SMA_150']).replace(',', '')), 2),
+                SMA_200=round(float(str(vals['SMA_200']).replace(',', '')), 2),
+                ema=round(float(str(vals['EMA']).replace(',', '')), 2),
+                rsi=round(float(str(vals['RSI']).replace(',', '')), 2)
             ) for vals in final_table.to_dict(orient='records')
         ]
         
