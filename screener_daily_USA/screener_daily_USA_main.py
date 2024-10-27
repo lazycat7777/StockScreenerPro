@@ -13,6 +13,9 @@ pd.options.mode.chained_assignment = None
 # symbols_and_exchanges = result_parser_of_symbols
 
 symbols_and_exchanges = [
+    ('AAM', 'NYSE'),
+    ('BKV', 'NASDAQ'),
+    ('CBNA', 'NASDAQ'),
     ('BKNG', 'NASDAQ'),
     ('MELI', 'NASDAQ'),
     ('ORLY', 'NASDAQ'),
