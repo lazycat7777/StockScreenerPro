@@ -96,7 +96,7 @@ services:
       - worker
     command: >
       bash -c "source /ctr-py-venv/bin/activate &&
-      celery -A screener_website flower"
+      celery -A screener_website flower --basic_auth=${FLOWER_USER}:${FLOWER_PASSWORD}"
     networks:
       - webapp_network
 
