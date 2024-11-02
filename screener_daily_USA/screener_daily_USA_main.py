@@ -133,7 +133,6 @@ def calculate_and_aggregate_results():
 
     # После завершения цикла добавляем все результаты в таблицу
     if results:
-        final_table.drop(final_table.index, inplace=True)
         final_table = pd.concat([final_table, pd.DataFrame(results)], ignore_index=True)
         results = []  # очищаем список для новых результатов
 
