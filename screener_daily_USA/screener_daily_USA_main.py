@@ -4,6 +4,7 @@ from django.db import transaction
 from tvDatafeed import TvDatafeed, Interval
 import talib
 import pandas as pd
+import numpy as np
 
 # Отключение предупреждений о цепочечном присваивании
 pd.options.mode.chained_assignment = None
@@ -39,13 +40,13 @@ interval = Interval.in_daily
 tv = TvDatafeed()
 
 # Словарь для хранения данных по каждому символу
-loaded_data = {}
-for symbol, exchange in symbols_and_exchanges:
-    loaded_data[(symbol, exchange)] = pd.DataFrame(columns=['open', 'high', 'low', 'close', 'volume']) 
+loaded_data = {
+    (symbol, exchange): pd.DataFrame(columns=['open', 'high', 'low', 'close', 'volume']) 
+    for symbol, exchange in symbols_and_exchanges
+}
 
 # Функция для получения новых данных
 def get_new_data(symbol, exchange, interval):
-    global loaded_data
     key = (symbol, exchange)
 
     try:
@@ -59,7 +60,6 @@ def get_new_data(symbol, exchange, interval):
             return None
     except Exception as e:
         return None
-
 
 def calculate_indicators(data):
     # ADR%
@@ -88,9 +88,7 @@ def calculate_indicators(data):
         'RSI': rsi.iloc[-1]
     }
 
-
 def calculate_and_aggregate_results():
-
     results = []
 
     # Общая таблица
@@ -107,10 +105,9 @@ def calculate_and_aggregate_results():
         'SMA_200',
         'EMA', 
         'RSI'
-        ])
+    ])
 
     for symbol, exchange in symbols_and_exchanges:
-
         new_data = get_new_data(symbol, exchange, interval)
 
         if new_data is not None:
@@ -135,6 +132,9 @@ def calculate_and_aggregate_results():
     if results:
         final_table = pd.concat([final_table, pd.DataFrame(results)], ignore_index=True)
         results = []  # очищаем список для новых результатов
+
+    # Заменяем NaN на None перед сохранением в базу данных
+    final_table = final_table.replace({np.nan: 0})
 
     # Очистка таблицы в базе данных перед сохранением новых данных
     StockData.objects.all().delete()
