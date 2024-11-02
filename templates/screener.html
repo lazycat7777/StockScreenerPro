@@ -28,6 +28,9 @@
         .dropdown label:hover {
             background-color: #f0f0f0;
         }
+        .export-buttons {
+            margin: 10px 0;
+        }
     </style>
 </head>
 <body>
@@ -49,6 +52,10 @@
             <label><input type="checkbox" value="ema" checked> EMA</label>
             <label><input type="checkbox" value="rsi" checked> RSI</label>
         </div>
+    </div>
+
+    <div class="export-buttons">
+        <button id="exportCsv">Экспорт в CSV</button>
     </div>
 
     <div id="myGrid" class="ag-theme-alpine"></div>
@@ -92,7 +99,8 @@
             };
 
             // Инициализация AG Grid
-            agGrid.createGrid(document.getElementById('myGrid'), gridOptions);
+            const gridDiv = document.getElementById('myGrid');
+            const gridApi = agGrid.createGrid(gridDiv, gridOptions);
 
             // Обработчик для переключения выпадающего списка
             document.getElementById('toggleDropdown').addEventListener('click', function() {
@@ -103,10 +111,28 @@
             // Обработчик для чекбоксов
             document.querySelectorAll('#dropdown input[type="checkbox"]').forEach(function(checkbox) {
                 checkbox.addEventListener('change', function() {
-                    const gridApi = agGrid.getGridInstance(document.getElementById('myGrid')).api;
-                    gridApi.setColumnVisible(checkbox.value, checkbox.checked);
+                    gridApi.setColumnsVisible([checkbox.value], checkbox.checked);
                 });
             });
+
+            // Функция для экспорта в CSV
+            document.getElementById('exportCsv').addEventListener('click', function() {
+                const csvData = gridApi.getDataAsCsv();
+                downloadFile('data.csv', csvData);
+            });
+
+            // Функция для загрузки файла
+            function downloadFile(filename, data) {
+                const blob = new Blob([data], { type: 'text/csv;charset=utf-8;' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
 
             // Закрываем выпадающий список при клике вне него
             document.addEventListener('click', function(event) {
