@@ -18,4 +18,4 @@ class StockData(models.Model):
 
     class Meta:
         app_label = 'screener_daily_USA' 
-        db_table = 'stock_data'
+        db_table = 'data_indicators'

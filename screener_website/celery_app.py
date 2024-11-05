@@ -11,8 +11,8 @@ app.conf.broker_url = settings.CELERY_BROKER_URL
 app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
-    'calculate_and_aggregate_results_USA': {
-        'task': 'screener_daily_USA.tasks.calculate_and_aggregate_results_USA',
+    'calculate_results_USA': {
+        'task': 'screener_daily_USA.tasks.calculate_results_USA',
         'schedule': crontab(minute=0, hour=3),
     }
 }
