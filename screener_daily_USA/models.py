@@ -1,11 +1,7 @@
 from django.db import models
-# Create your models here.
-
 
 class StockData(models.Model):
     symbol = models.CharField(max_length=255, primary_key=True)
-    exchange = models.CharField(max_length=255)
-    price = models.FloatField(null=True)
     ADR_percent = models.FloatField(null=True)
     SMA_10 = models.FloatField(null=True)
     SMA_20 = models.FloatField(null=True)

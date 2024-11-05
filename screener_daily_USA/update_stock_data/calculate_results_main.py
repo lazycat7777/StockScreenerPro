@@ -18,8 +18,6 @@ def calculate_and_aggregate_results():
     # Общая таблица
     final_table = pd.DataFrame(columns=[
         'Symbol', 
-        'Exchange', 
-        'Price', 
         'ADR_percent',
         'SMA_10', 
         'SMA_20', 
@@ -38,9 +36,7 @@ def calculate_and_aggregate_results():
             indicators_dict = calculate_indicators(new_data)
 
             results.append({
-                'Symbol': symbol,
-                'Exchange': exchange,
-                'Price': indicators_dict['Price'],
+                'Symbol': f"{exchange}:{symbol}",
                 'ADR_percent': indicators_dict['ADR_percent'],
                 'SMA_10': indicators_dict['SMA_10'],
                 'SMA_20': indicators_dict['SMA_20'],
@@ -69,8 +65,6 @@ def calculate_and_aggregate_results():
             final_table_in_db.append(
                 StockData(
                     symbol=vals['Symbol'], 
-                    exchange=vals['Exchange'], 
-                    price=round(float(vals['Price']) if isinstance(vals['Price'], (float, int)) else (float(vals['Price'].replace(',', '')) if vals['Price'] not in [None, 'None'] else 0), 2) if vals['Price'] is not None else None,
                     ADR_percent=round(float(vals['ADR_percent']) if isinstance(vals['ADR_percent'], (float, int)) else (float(vals['ADR_percent'].replace(',', '')) if vals['ADR_percent'] not in [None, 'None'] else 0), 2) if vals['ADR_percent'] is not None else None,
                     SMA_10=round(float(vals['SMA_10']) if isinstance(vals['SMA_10'], (float, int)) else (float(vals['SMA_10'].replace(',', '')) if vals['SMA_10'] not in [None, 'None'] else 0), 2) if vals['SMA_10'] is not None else None,
                     SMA_20=round(float(vals['SMA_20']) if isinstance(vals['SMA_20'], (float, int)) else (float(vals['SMA_20'].replace(',', '')) if vals['SMA_20'] not in [None, 'None'] else 0), 2) if vals['SMA_20'] is not None else None,
