@@ -230,3 +230,71 @@ class Stock_Data_Valuation(models.Model):
     class Meta:
         app_label = 'screener_daily_USA'
         db_table = 'stock_data_valuation_USA'
+
+
+class NDX_Components(models.Model):
+    symbol = models.CharField(max_length=255, primary_key=True)
+    ndx_components = models.CharField(max_length=255, null=True)
+    name = models.CharField(max_length=255, null=True)
+    description = models.CharField(max_length=255, null=True)
+    logoid = models.CharField(max_length=255, null=True)
+    update_mode = models.CharField(max_length=255, null=True)
+    type = models.CharField(max_length=255, null=True)
+    typespecs = models.CharField(max_length=255, null=True)
+    market_cap_basic = models.FloatField(null=True)
+    fundamental_currency_code = models.CharField(max_length=255, null=True)
+    close = models.FloatField(null=True)
+    pricescale = models.FloatField(null=True)
+    minmov = models.FloatField(null=True)
+    fractional = models.CharField(max_length=255, null=True)
+    minmove2 = models.FloatField(null=True)
+    currency = models.CharField(max_length=255, null=True)
+    change = models.FloatField(null=True)
+    volume = models.FloatField(null=True)
+    relative_volume_10d_calc = models.FloatField(null=True)
+    price_earnings_ttm = models.FloatField(null=True)
+    earnings_per_share_diluted_ttm = models.FloatField(null=True)
+    earnings_per_share_diluted_yoy_growth_ttm = models.FloatField(null=True)
+    dividends_yield_current = models.FloatField(null=True)
+    sector_tr = models.CharField(max_length=255, null=True)
+    market = models.CharField(max_length=255, null=True)
+    sector = models.CharField(max_length=255, null=True)
+    recommendation_mark = models.CharField(max_length=255, null=True)
+
+    class Meta:
+        app_label = 'screener_daily_USA'
+        db_table = 'stock_NDX_components_USA'
+
+
+class SPX_Components(models.Model):
+    symbol = models.CharField(max_length=255, primary_key=True)
+    spx_components = models.CharField(max_length=255, null=True)
+    name = models.CharField(max_length=255, null=True)
+    description = models.CharField(max_length=255, null=True)
+    logoid = models.CharField(max_length=255, null=True)
+    update_mode = models.CharField(max_length=255, null=True)
+    type = models.CharField(max_length=255, null=True)
+    typespecs = models.CharField(max_length=255, null=True)
+    market_cap_basic = models.FloatField(null=True)
+    fundamental_currency_code = models.CharField(max_length=255, null=True)
+    close = models.FloatField(null=True)
+    pricescale = models.FloatField(null=True)
+    minmov = models.FloatField(null=True)
+    fractional = models.CharField(max_length=255, null=True)
+    minmove2 = models.FloatField(null=True)
+    currency = models.CharField(max_length=255, null=True)
+    change = models.FloatField(null=True)
+    volume = models.FloatField(null=True)
+    relative_volume_10d_calc = models.FloatField(null=True)
+    price_earnings_ttm = models.FloatField(null=True)
+    earnings_per_share_diluted_ttm = models.FloatField(null=True)
+    earnings_per_share_diluted_yoy_growth_ttm = models.FloatField(null=True)
+    dividends_yield_current = models.FloatField(null=True)
+    sector_tr = models.CharField(max_length=255, null=True)
+    market = models.CharField(max_length=255, null=True)
+    sector = models.CharField(max_length=255, null=True)
+    recommendation_mark = models.CharField(max_length=255, null=True)
+
+    class Meta:
+        app_label = 'screener_daily_USA' 
+        db_table = 'stock_SPX_components_USA' 

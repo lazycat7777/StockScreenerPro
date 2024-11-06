@@ -25,7 +25,7 @@ payload = {
         "lang": "en"
     },
     "preset": "all_stocks",
-    "range": [0, 999999],
+    "range": [0, 9999],
     "sort": {
         "sortBy": "name",
         "sortOrder": "asc",
