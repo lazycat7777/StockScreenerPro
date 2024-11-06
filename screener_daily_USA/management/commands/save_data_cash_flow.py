@@ -1,4 +1,4 @@
-from screener_daily_USA.parsing_data_from_tradingview.data_cash_flow import get_stock_data
+from screener_daily_USA.parsing_data_from_tradingview_USA.data_cash_flow import get_stock_data
 
 from django.core.management.base import BaseCommand
 

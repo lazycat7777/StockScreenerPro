@@ -86,6 +86,9 @@ if stock_data:
             )
         )
     
+    # Очистка таблицы в базе данных перед сохранением новых данных
+    Stock_Data_Balance_Sheet.objects.all().delete()
+
     # Сохраняем данные в базе данных
     Stock_Data_Balance_Sheet.objects.bulk_create(stock_objects)
 

@@ -1,4 +1,4 @@
-from screener_daily_USA.update_stock_data.calculate_results_main import calculate_and_aggregate_results
+from screener_daily_USA.update_stock_data_USA.calculate_results_main import calculate_and_aggregate_results
 
 from django.core.management.base import BaseCommand
 

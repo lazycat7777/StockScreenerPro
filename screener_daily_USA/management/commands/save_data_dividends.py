@@ -1,4 +1,4 @@
-from screener_daily_USA.parsing_data_from_tradingview.data_dividends import get_stock_data
+from screener_daily_USA.parsing_data_from_tradingview_USA.data_dividends import get_stock_data
 
 from django.core.management.base import BaseCommand
 

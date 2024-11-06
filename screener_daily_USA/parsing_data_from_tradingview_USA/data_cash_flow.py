@@ -1,6 +1,6 @@
 import requests
 import pandas as pd
-from screener_daily_USA.models import Stock_Data_Dividends  
+from screener_daily_USA.models import Stock_Data_Cash_Flow 
 from django.db import transaction
 
 URL = 'https://scanner.tradingview.com/america/scan?label-product=markets-screener'
@@ -13,21 +13,20 @@ HEADERS = {
     'referer': 'https://www.tradingview.com/',
 }
 
+# Тело запроса с параметрами
 payload = {
     "columns": [
-        "name", "description", "logoid", "update_mode", "type", "typespecs", 
-        "dps_common_stock_prim_issue_fy", "fundamental_currency_code", 
-        "dps_common_stock_prim_issue_fq", "dividends_yield_current", 
-        "dividends_yield", "dividend_payout_ratio_ttm", 
-        "dps_common_stock_prim_issue_yoy_growth_fy", "continuous_dividend_payout", 
-        "continuous_dividend_growth"
+        "name", "description", "logoid", "update_mode", "type", "typespecs",
+        "cash_f_operating_activities_ttm", "fundamental_currency_code",
+        "cash_f_investing_activities_ttm", "cash_f_financing_activities_ttm",
+        "free_cash_flow_ttm", "capital_expenditures_ttm"
     ],
     "ignore_unknown_fields": False,
     "options": {
         "lang": "en"
     },
     "preset": "all_stocks",
-    "range": [0, 999999],  
+    "range": [0, 999999], 
     "sort": {
         "sortBy": "name",
         "sortOrder": "asc",
@@ -57,11 +56,13 @@ def get_stock_data():
         print(f"Error: {response.status_code} - {response.text}")
         return None
 
+# Получаем данные
 stock_data = get_stock_data()
 
 if stock_data:
+    # Преобразуем данные в объекты модели
     stock_objects = [
-        Stock_Data_Dividends(
+        Stock_Data_Cash_Flow(
             symbol=stock.get('s'),
             name=stock.get('d')[0] if len(stock['d']) > 0 else None,
             exchange=stock.get('s').split(':')[0],
@@ -70,21 +71,22 @@ if stock_data:
             update_mode=stock.get('d')[3] if len(stock['d']) > 3 else None,
             type=stock.get('d')[4] if len(stock['d']) > 4 else None,
             typespecs=stock.get('d')[5] if len(stock['d']) > 5 else None,
-            dps_common_stock_prim_issue_fy=stock.get('d')[6] if len(stock['d']) > 6 else None,
+            cash_f_operating_activities_ttm=stock.get('d')[6] if len(stock['d']) > 6 else None,
             fundamental_currency_code=stock.get('d')[7] if len(stock['d']) > 7 else None,
-            dps_common_stock_prim_issue_fq=stock.get('d')[8] if len(stock['d']) > 8 else None,
-            dividends_yield_current=stock.get('d')[9] if len(stock['d']) > 9 else None,
-            dividends_yield=stock.get('d')[10] if len(stock['d']) > 10 else None,
-            dividend_payout_ratio_ttm=stock.get('d')[11] if len(stock['d']) > 11 else None,
-            dps_common_stock_prim_issue_yoy_growth_fy=stock.get('d')[12] if len(stock['d']) > 12 else None,
-            continuous_dividend_payout=stock.get('d')[13] if len(stock['d']) > 13 else None,
-            continuous_dividend_growth=stock.get('d')[14] if len(stock['d']) > 14 else None,
-        ) for stock in stock_data
+            cash_f_investing_activities_ttm=stock.get('d')[8] if len(stock['d']) > 8 else None,
+            cash_f_financing_activities_ttm=stock.get('d')[9] if len(stock['d']) > 9 else None,
+            free_cash_flow_ttm=stock.get('d')[10] if len(stock['d']) > 10 else None,
+            capital_expenditures_ttm=stock.get('d')[11] if len(stock['d']) > 11 else None,
+        )
+        for stock in stock_data
     ]
-    
-    with transaction.atomic(): 
-        Stock_Data_Dividends.objects.bulk_create(stock_objects)
-    
-    print("Данные успешно сохранены.")
+
+    # Очистка таблицы в базе данных перед сохранением новых данных
+    Stock_Data_Cash_Flow.objects.all().delete()
+
+    with transaction.atomic():
+        Stock_Data_Cash_Flow.objects.bulk_create(stock_objects)
+
+    print("Данные Stock_Data_Cash_Flow успешно сохранены в базу данных.")
 else:
     print("Не удалось получить данные акций.")
