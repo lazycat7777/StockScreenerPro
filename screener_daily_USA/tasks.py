@@ -1,4 +1,4 @@
-from .update_stock_data.calculate_results_main import calculate_and_aggregate_results
+from .update_stock_data_USA.calculate_results_main import calculate_and_aggregate_results
 from screener_website.celery_app import app
 
 
