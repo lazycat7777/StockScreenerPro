@@ -112,10 +112,6 @@ DATABASES = {
         "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
         "HOST": os.environ.get("POSTGRES_HOST"),
         "PORT": os.environ.get("POSTGRES_PORT"),
-    },
-    'tradingview_data_db': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'tradingview_data.db'
     }
 }
 

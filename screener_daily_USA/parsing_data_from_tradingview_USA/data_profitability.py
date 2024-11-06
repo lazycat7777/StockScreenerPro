@@ -1,8 +1,7 @@
 import requests
-import pandas as pd
-import sqlite3
+from screener_daily_USA.models import Stock_Data_Profitability
+from django.db import transaction
 
-# Устанавливаем URL и заголовки
 URL = 'https://scanner.tradingview.com/america/scan?label-product=markets-screener'
 HEADERS = {
     'authority': 'scanner.tradingview.com',
@@ -13,10 +12,9 @@ HEADERS = {
     'referer': 'https://www.tradingview.com/',
 }
 
-# Тело запроса с параметрами
 payload = {
     "columns": [
-        "name", "description", "logoid", "update_mode", "type", "typespecs",
+        "name", "description", "logoid", "update_mode", "type", "typespecs", 
         "gross_margin_ttm", "operating_margin_ttm", "pre_tax_margin_ttm",
         "net_margin_ttm", "free_cash_flow_margin_ttm", "return_on_assets_fq",
         "return_on_equity_fq", "return_on_invested_capital_fq", 
@@ -49,52 +47,44 @@ payload = {
 
 def get_stock_data():
     response = requests.post(URL, json=payload, headers=HEADERS)
-    
     if response.status_code == 200:
         data = response.json()
-        return data['data']  
+        return data['data']
     else:
         print(f"Error: {response.status_code} - {response.text}")
         return None
 
-# Получаем данные
 stock_data = get_stock_data()
 
 if stock_data:
-    # Преобразуем данные в DataFrame
-    df = pd.DataFrame([{
-        'symbol': stock.get('s'),
-        'name': stock.get('d')[0] if len(stock['d']) > 0 else None,
-        'exchange': stock.get('s').split(':')[0],  # Извлекаем текст до знака ':'
-        'description': stock.get('d')[1] if len(stock['d']) > 1 else None,
-        'logoid': stock.get('d')[2] if len(stock['d']) > 2 else None,
-        'update_mode': stock.get('d')[3] if len(stock['d']) > 3 else None,
-        'type': stock.get('d')[4] if len(stock['d']) > 4 else None,
-        'typespecs': stock.get('d')[5] if len(stock['d']) > 5 else None,
-        'gross_margin_ttm': stock.get('d')[6] if len(stock['d']) > 6 else None,
-        'operating_margin_ttm': stock.get('d')[7] if len(stock['d']) > 7 else None,
-        'pre_tax_margin_ttm': stock.get('d')[8] if len(stock['d']) > 8 else None,
-        'net_margin_ttm': stock.get('d')[9] if len(stock['d']) > 9 else None,
-        'free_cash_flow_margin_ttm': stock.get('d')[10] if len(stock['d']) > 10 else None,
-        'return_on_assets_fq': stock.get('d')[11] if len(stock['d']) > 11 else None,
-        'return_on_equity_fq': stock.get('d')[12] if len(stock['d']) > 12 else None,
-        'return_on_invested_capital_fq': stock.get('d')[13] if len(stock['d']) > 13 else None,
-        'research_and_dev_ratio_ttm': stock.get('d')[14] if len(stock['d']) > 14 else None,
-        'sell_gen_admin_exp_other_ratio_ttm': stock.get('d')[15] if len(stock['d']) > 15 else None,
-    } for stock in stock_data])
+    stock_objects = [
+        Stock_Data_Profitability(
+            symbol=stock.get('s'),
+            name=stock.get('d')[0] if len(stock['d']) > 0 else None,
+            exchange=stock.get('s').split(':')[0],
+            description=stock.get('d')[1] if len(stock['d']) > 1 else None,
+            logoid=stock.get('d')[2] if len(stock['d']) > 2 else None,
+            update_mode=stock.get('d')[3] if len(stock['d']) > 3 else None,
+            type=stock.get('d')[4] if len(stock['d']) > 4 else None,
+            typespecs=stock.get('d')[5] if len(stock['d']) > 5 else None,
+            gross_margin_ttm=stock.get('d')[6] if len(stock['d']) > 6 else None,
+            operating_margin_ttm=stock.get('d')[7] if len(stock['d']) > 7 else None,
+            pre_tax_margin_ttm=stock.get('d')[8] if len(stock['d']) > 8 else None,
+            net_margin_ttm=stock.get('d')[9] if len(stock['d']) > 9 else None,
+            free_cash_flow_margin_ttm=stock.get('d')[10] if len(stock['d']) > 10 else None,
+            return_on_assets_fq=stock.get('d')[11] if len(stock['d']) > 11 else None,
+            return_on_equity_fq=stock.get('d')[12] if len(stock['d']) > 12 else None,
+            return_on_invested_capital_fq=stock.get('d')[13] if len(stock['d']) > 13 else None,
+            research_and_dev_ratio_ttm=stock.get('d')[14] if len(stock['d']) > 14 else None,
+            sell_gen_admin_exp_other_ratio_ttm=stock.get('d')[15] if len(stock['d']) > 15 else None,
+        ) for stock in stock_data
+    ]
+
+    Stock_Data_Profitability.objects.all().delete()
+
+    with transaction.atomic():
+        Stock_Data_Profitability.objects.bulk_create(stock_objects)
     
-    # Преобразуем типы данных
-    df['typespecs'] = df['typespecs'].apply(lambda x: ', '.join(x) if isinstance(x, list) else x)
-    
-    # Создаем соединение с SQLite базой данных
-    conn = sqlite3.connect('tradingview_data.db')
-    
-    # Сохраняем данные в таблицу 'stock_data_profitability'
-    df.to_sql('stock_data_profitability', conn, if_exists='replace', index=False)
-    
-    print("Данные успешно сохранены в базу данных SQLite.")
-    
-    # Закрываем соединение
-    conn.close()
+    print("Данные успешно сохранены.")
 else:
     print("Не удалось получить данные акций.")
