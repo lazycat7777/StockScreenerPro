@@ -1,6 +1,5 @@
 import requests
-import pandas as pd
-from screener_daily_USA.models import Stock_Data_Cash_Flow 
+from ..models import Stock_Data_Cash_Flow 
 from django.db import transaction
 
 URL = 'https://scanner.tradingview.com/america/scan?label-product=markets-screener'
@@ -13,7 +12,6 @@ HEADERS = {
     'referer': 'https://www.tradingview.com/',
 }
 
-# Тело запроса с параметрами
 payload = {
     "columns": [
         "name", "description", "logoid", "update_mode", "type", "typespecs",
@@ -56,11 +54,9 @@ def get_stock_data():
         print(f"Error: {response.status_code} - {response.text}")
         return None
 
-# Получаем данные
 stock_data = get_stock_data()
 
 if stock_data:
-    # Преобразуем данные в объекты модели
     stock_objects = [
         Stock_Data_Cash_Flow(
             symbol=stock.get('s'),
@@ -81,12 +77,11 @@ if stock_data:
         for stock in stock_data
     ]
 
-    # Очистка таблицы в базе данных перед сохранением новых данных
     Stock_Data_Cash_Flow.objects.all().delete()
 
     with transaction.atomic():
         Stock_Data_Cash_Flow.objects.bulk_create(stock_objects)
 
-    print("Данные Stock_Data_Cash_Flow успешно сохранены в базу данных.")
+    print("Данные успешно сохранены.")
 else:
     print("Не удалось получить данные акций.")

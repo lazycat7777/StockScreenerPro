@@ -1,6 +1,5 @@
 import requests
-import pandas as pd
-from screener_daily_USA.models import Stock_Data_Dividends  
+from ..models import Stock_Data_Dividends  
 from django.db import transaction
 
 URL = 'https://scanner.tradingview.com/america/scan?label-product=markets-screener'
@@ -82,7 +81,6 @@ if stock_data:
         ) for stock in stock_data
     ]
     
-    # Очистка таблицы в базе данных перед сохранением новых данных
     Stock_Data_Dividends.objects.all().delete()
     
     with transaction.atomic(): 

@@ -1,7 +1,7 @@
 import requests
 from ..models import Stock_Data_Balance_Sheet 
+from django.db import transaction
 
-# Устанавливаем URL и заголовки
 URL = 'https://scanner.tradingview.com/america/scan?label-product=markets-screener'
 HEADERS = {
     'authority': 'scanner.tradingview.com',
@@ -12,7 +12,6 @@ HEADERS = {
     'referer': 'https://www.tradingview.com/',
 }
 
-# Тело запроса с параметрами
 payload = {
     "columns": [
         "name", "description", "logoid", "update_mode", "type", "typespecs",
@@ -86,12 +85,11 @@ if stock_data:
             )
         )
     
-    # Очистка таблицы в базе данных перед сохранением новых данных
     Stock_Data_Balance_Sheet.objects.all().delete()
 
-    # Сохраняем данные в базе данных
-    Stock_Data_Balance_Sheet.objects.bulk_create(stock_objects)
+    with transaction.atomic(): 
+        Stock_Data_Balance_Sheet.objects.bulk_create(stock_objects)
 
-    print("Данные Stock_Data_Balance_Sheet успешно сохранены в базу данных.")
+    print("Данные успешно сохранены.")
 else:
     print("Не удалось получить данные акций.")

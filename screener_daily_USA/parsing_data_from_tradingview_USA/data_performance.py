@@ -1,5 +1,5 @@
 import requests
-from screener_daily_USA.models import Stock_Data_Performance
+from ..models import Stock_Data_Performance
 from django.db import transaction
 
 URL = 'https://scanner.tradingview.com/america/scan?label-product=markets-screener'
