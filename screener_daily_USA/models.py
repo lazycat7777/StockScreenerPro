@@ -1,6 +1,6 @@
 from django.db import models
 
-class StockData(models.Model):
+class Stock_Data_Indicators(models.Model):
     symbol = models.CharField(max_length=255, primary_key=True)
     ADR_percent = models.FloatField(null=True)
     SMA_10 = models.FloatField(null=True)

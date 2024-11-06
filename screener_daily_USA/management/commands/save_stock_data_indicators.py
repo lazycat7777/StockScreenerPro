@@ -4,8 +4,7 @@ from django.core.management.base import BaseCommand
 
 
 class Command(BaseCommand):
-    help = 'Обновляет данные о акциях и рассчитывает индикаторы'
 
     def handle(self, *args, **options):
         calculate_and_aggregate_results()
-        self.stdout.write(self.style.SUCCESS('Данные успешно обновлены'))
+        self.stdout.write(self.style.SUCCESS('Данные Stock_Data_Indicators успешно обновлены'))

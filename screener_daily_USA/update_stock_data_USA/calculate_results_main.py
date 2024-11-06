@@ -3,7 +3,7 @@ from .indicators import calculate_indicators
 from .symbols_and_exchanges_main import symbols_and_exchanges
 from .connecting_to_tradingview import interval
 
-from ..models import StockData
+from ..models import Stock_Data_Indicators
 from django.db import transaction
 import pandas as pd
 import numpy as np
@@ -56,14 +56,14 @@ def calculate_and_aggregate_results():
     final_table = final_table.replace({np.nan: None})
 
     # Очистка таблицы в базе данных перед сохранением новых данных
-    StockData.objects.all().delete()
+    Stock_Data_Indicators.objects.all().delete()
 
     # Сохраняем данные в одном транзакционном блоке
     with transaction.atomic():
         final_table_in_db = []
         for vals in final_table.to_dict(orient='records'):
             final_table_in_db.append(
-                StockData(
+                Stock_Data_Indicators(
                     symbol=vals['Symbol'], 
                     ADR_percent=round(float(vals['ADR_percent']) if isinstance(vals['ADR_percent'], (float, int)) else (float(vals['ADR_percent'].replace(',', '')) if vals['ADR_percent'] not in [None, 'None'] else 0), 2) if vals['ADR_percent'] is not None else None,
                     SMA_10=round(float(vals['SMA_10']) if isinstance(vals['SMA_10'], (float, int)) else (float(vals['SMA_10'].replace(',', '')) if vals['SMA_10'] not in [None, 'None'] else 0), 2) if vals['SMA_10'] is not None else None,
@@ -78,6 +78,6 @@ def calculate_and_aggregate_results():
             )
 
         # Сохраняем все данные в базе данных
-        StockData.objects.bulk_create(final_table_in_db)
+        Stock_Data_Indicators.objects.bulk_create(final_table_in_db)
 
     return final_table
