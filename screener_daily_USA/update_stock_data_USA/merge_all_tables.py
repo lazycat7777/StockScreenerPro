@@ -49,7 +49,7 @@ def merge_tables():
 
     # Stock_Data_Valuation
     valuation_columns = [
-        'price_earnings_ttm', 'price_earnings_growth_ttm', 'price_sales_current',
+        'perf_1y_market_cap', 'price_earnings_growth_ttm', 'price_sales_current',
         'price_book_fq', 'price_to_cash_f_operating_activities_ttm', 'price_free_cash_flow_ttm',
         'price_to_cash_ratio', 'enterprise_value_current', 'enterprise_value_to_revenue_ttm',
         'enterprise_value_to_ebit_ttm', 'enterprise_value_ebitda_ttm'
@@ -62,7 +62,7 @@ def merge_tables():
     # Stock_Data_Dividends
     dividends_columns = [
         'dps_common_stock_prim_issue_fy', 'dps_common_stock_prim_issue_fq', 
-        'dividends_yield_current', 'dividends_yield', 'dividend_payout_ratio_ttm', 
+        'dividends_yield', 'dividend_payout_ratio_ttm', 
         'dps_common_stock_prim_issue_yoy_growth_fy', 'continuous_dividend_payout', 
         'continuous_dividend_growth'
     ]
@@ -85,8 +85,7 @@ def merge_tables():
     # Stock_Data_Income_Statement
     income_statement_columns = [
         'total_revenue_ttm', 'total_revenue_yoy_growth_ttm', 'gross_profit_ttm',
-        'oper_income_ttm', 'net_income_ttm', 'ebitda_ttm', 
-        'earnings_per_share_diluted_ttm', 'earnings_per_share_diluted_yoy_growth_ttm'
+        'oper_income_ttm', 'net_income_ttm', 'ebitda_ttm'
     ]
     income_statement_data = queryset_to_dataframe(
         Stock_Data_Income_Statement.objects.all().only('symbol', *income_statement_columns),
