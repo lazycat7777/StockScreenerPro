@@ -11,7 +11,8 @@ from ..models import (
     Stock_Data_Balance_Sheet,
     Stock_Data_Cash_Flow,
     SPX_Components,
-    NDX_Components
+    NDX_Components,
+    Stock_Data_Indicators
 )
 
 # Функция для конвертации QuerySet в DataFrame
@@ -126,6 +127,18 @@ def merge_tables():
         ['symbol', 'ndx_components']
     )
 
+    # Stock_Data_Indicators
+    indicators_columns = [
+        'ADR_percent', 'SMA_10', 'SMA_20', 'SMA_50', 'SMA_100', 'SMA_150', 'SMA_200', 
+        'high_10', 'high_20', 'high_50', 'high_100', 'high_150', 'high_200', 
+        'high_1y', 'low_10', 'low_20', 'low_50', 'low_100', 'low_150', 
+        'low_200', 'low_1y'
+    ]
+    indicators_data = queryset_to_dataframe(
+        Stock_Data_Indicators.objects.all().only('symbol', *indicators_columns),
+        ['symbol'] + indicators_columns
+    )
+
     # left join по столбцу symbol для всех данных
     merged_data = pd.merge(overview_data, performance_data, on='symbol', how='left')
     merged_data = pd.merge(merged_data, valuation_data, on='symbol', how='left')
@@ -136,6 +149,7 @@ def merge_tables():
     merged_data = pd.merge(merged_data, cash_flow_data, on='symbol', how='left')
     merged_data = pd.merge(merged_data, spx_components_data, on='symbol', how='left')
     merged_data = pd.merge(merged_data, ndx_components_data, on='symbol', how='left')
+    merged_data = pd.merge(merged_data, indicators_data, on='symbol', how='left')
 
     with sqlite3.connect("merge_tables.db") as conn:
         merged_data.to_sql("merged_stock_data", conn, if_exists="replace", index=False)
