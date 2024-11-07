@@ -8,13 +8,26 @@ class Stock_Data_Indicators(models.Model):
     SMA_50 = models.FloatField(null=True)
     SMA_100 = models.FloatField(null=True)
     SMA_150 = models.FloatField(null=True)
-    SMA_200 = models.FloatField(null=True)
-    ema = models.FloatField(null=True)
-    rsi = models.FloatField(null=True)
+    SMA_200 = models.FloatField(null=True) 
+    high_10 = models.FloatField(null=True)
+    high_20 = models.FloatField(null=True)
+    high_50 = models.FloatField(null=True)
+    high_100 = models.FloatField(null=True)
+    high_150 = models.FloatField(null=True)
+    high_200 = models.FloatField(null=True)
+    high_1y = models.FloatField(null=True)
+    low_10 = models.FloatField(null=True)
+    low_20 = models.FloatField(null=True)
+    low_50 = models.FloatField(null=True)
+    low_100 = models.FloatField(null=True)
+    low_150 = models.FloatField(null=True)
+    low_200 = models.FloatField(null=True)
+    low_1y = models.FloatField(null=True)
 
     class Meta:
-        app_label = 'screener_daily_USA' 
+        app_label = 'screener_daily_USA'
         db_table = 'stock_data_indicators_USA'
+
 
 
 class Stock_Data_Balance_Sheet(models.Model):
