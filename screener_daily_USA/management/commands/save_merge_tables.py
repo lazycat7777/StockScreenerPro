@@ -6,4 +6,4 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         merge_tables()
-        self.stdout.write(self.style.SUCCESS('Данные merge_tables сохранены.'))
+        self.stdout.write(self.style.SUCCESS('Данные Stock_Merge_All_Tables сохранены.'))
