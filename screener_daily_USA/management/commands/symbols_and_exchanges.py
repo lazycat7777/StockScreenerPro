@@ -15,5 +15,4 @@ class Command(BaseCommand):
                     exchange, symbol = full_symbol.split(':')
                     symbols_and_exchanges.append((symbol, exchange))
 
-        # Вывод результата
         self.stdout.write(str(symbols_and_exchanges))

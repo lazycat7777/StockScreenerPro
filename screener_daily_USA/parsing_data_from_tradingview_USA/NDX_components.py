@@ -38,46 +38,47 @@ def get_stock_data():
         print(f"Error: {response.status_code} - {response.text}")
         return None
 
-stock_data = get_stock_data()
+def NDX_components_get_stock_data():
+    stock_data = get_stock_data()
 
-if stock_data:
-    stock_objects = [
-        NDX_Components(
-            symbol=stock.get('s'),
-            ndx_components='NASDAQ 100',
-            name=stock.get('d')[0] if len(stock['d']) > 0 else None,
-            description=stock.get('d')[1] if len(stock['d']) > 1 else None,
-            logoid=stock.get('d')[2] if len(stock['d']) > 2 else None,
-            update_mode=stock.get('d')[3] if len(stock['d']) > 3 else None,
-            type=stock.get('d')[4] if len(stock['d']) > 4 else None,
-            typespecs=stock.get('d')[5] if len(stock['d']) > 5 else None,
-            market_cap_basic=stock.get('d')[6] if len(stock['d']) > 6 else None,
-            fundamental_currency_code=stock.get('d')[7] if len(stock['d']) > 7 else None,
-            close=stock.get('d')[8] if len(stock['d']) > 8 else None,
-            pricescale=stock.get('d')[9] if len(stock['d']) > 9 else None,
-            minmov=stock.get('d')[10] if len(stock['d']) > 10 else None,
-            fractional=stock.get('d')[11] if len(stock['d']) > 11 else None,
-            minmove2=stock.get('d')[12] if len(stock['d']) > 12 else None,
-            currency=stock.get('d')[13] if len(stock['d']) > 13 else None,
-            change=stock.get('d')[14] if len(stock['d']) > 14 else None,
-            volume=stock.get('d')[15] if len(stock['d']) > 15 else None,
-            relative_volume_10d_calc=stock.get('d')[16] if len(stock['d']) > 16 else None,
-            price_earnings_ttm=stock.get('d')[17] if len(stock['d']) > 17 else None,
-            earnings_per_share_diluted_ttm=stock.get('d')[18] if len(stock['d']) > 18 else None,
-            earnings_per_share_diluted_yoy_growth_ttm=stock.get('d')[19] if len(stock['d']) > 19 else None,
-            dividends_yield_current=stock.get('d')[20] if len(stock['d']) > 20 else None,
-            sector_tr=stock.get('d')[21] if len(stock['d']) > 21 else None,
-            market=stock.get('d')[22] if len(stock['d']) > 22 else None,
-            sector=stock.get('d')[23] if len(stock['d']) > 23 else None,
-            recommendation_mark=stock.get('d')[24] if len(stock['d']) > 24 else None,
-        ) for stock in stock_data
-    ]
+    if stock_data:
+        stock_objects = [
+            NDX_Components(
+                symbol=stock.get('s'),
+                ndx_components='NASDAQ 100',
+                name=stock.get('d')[0] if len(stock['d']) > 0 else None,
+                description=stock.get('d')[1] if len(stock['d']) > 1 else None,
+                logoid=stock.get('d')[2] if len(stock['d']) > 2 else None,
+                update_mode=stock.get('d')[3] if len(stock['d']) > 3 else None,
+                type=stock.get('d')[4] if len(stock['d']) > 4 else None,
+                typespecs=stock.get('d')[5] if len(stock['d']) > 5 else None,
+                market_cap_basic=stock.get('d')[6] if len(stock['d']) > 6 else None,
+                fundamental_currency_code=stock.get('d')[7] if len(stock['d']) > 7 else None,
+                close=stock.get('d')[8] if len(stock['d']) > 8 else None,
+                pricescale=stock.get('d')[9] if len(stock['d']) > 9 else None,
+                minmov=stock.get('d')[10] if len(stock['d']) > 10 else None,
+                fractional=stock.get('d')[11] if len(stock['d']) > 11 else None,
+                minmove2=stock.get('d')[12] if len(stock['d']) > 12 else None,
+                currency=stock.get('d')[13] if len(stock['d']) > 13 else None,
+                change=stock.get('d')[14] if len(stock['d']) > 14 else None,
+                volume=stock.get('d')[15] if len(stock['d']) > 15 else None,
+                relative_volume_10d_calc=stock.get('d')[16] if len(stock['d']) > 16 else None,
+                price_earnings_ttm=stock.get('d')[17] if len(stock['d']) > 17 else None,
+                earnings_per_share_diluted_ttm=stock.get('d')[18] if len(stock['d']) > 18 else None,
+                earnings_per_share_diluted_yoy_growth_ttm=stock.get('d')[19] if len(stock['d']) > 19 else None,
+                dividends_yield_current=stock.get('d')[20] if len(stock['d']) > 20 else None,
+                sector_tr=stock.get('d')[21] if len(stock['d']) > 21 else None,
+                market=stock.get('d')[22] if len(stock['d']) > 22 else None,
+                sector=stock.get('d')[23] if len(stock['d']) > 23 else None,
+                recommendation_mark=stock.get('d')[24] if len(stock['d']) > 24 else None,
+            ) for stock in stock_data
+        ]
 
-    NDX_Components.objects.all().delete()  
+        NDX_Components.objects.all().delete()  
 
-    with transaction.atomic():  
-        NDX_Components.objects.bulk_create(stock_objects)
+        with transaction.atomic():  
+            NDX_Components.objects.bulk_create(stock_objects)
 
-    print("Данные успешно сохранены.")
-else:
-    print("Не удалось получить данные акций.")
+        print("Данные NDX_Components успешно сохранены в базу данных.")
+    else:
+        print("Не удалось получить данные акций.")

@@ -15,7 +15,6 @@ warnings.filterwarnings("ignore", category=FutureWarning)
 def calculate_and_aggregate_results():
     results = []
 
-    # Общая таблица
     final_table = pd.DataFrame(columns=[
         'Symbol', 
         'ADR_percent',
@@ -72,17 +71,13 @@ def calculate_and_aggregate_results():
                 'Low_1Y': indicators_dict['Low_1Y']
             })
 
-    # После завершения цикла добавляем все результаты в таблицу
     if results:
         final_table = pd.concat([final_table, pd.DataFrame(results)], ignore_index=True)
 
-    # Заменяем NaN на None перед сохранением в базу данных
     final_table = final_table.replace({np.nan: None})
 
-    # Очистка таблицы в базе данных перед сохранением новых данных
     Stock_Data_Indicators.objects.all().delete()
 
-    # Сохраняем данные в одном транзакционном блоке
     with transaction.atomic():
         final_table_in_db = []
         for vals in final_table.to_dict(orient='records'):
@@ -113,3 +108,5 @@ def calculate_and_aggregate_results():
                 )
             )
         Stock_Data_Indicators.objects.bulk_create(final_table_in_db)
+
+    print("Данные Stock_Data_Indicators успешно обновлены.")

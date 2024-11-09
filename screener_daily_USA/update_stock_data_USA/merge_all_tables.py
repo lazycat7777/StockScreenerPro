@@ -270,4 +270,4 @@ def save_merge_tables_to_db(merged_data):
 
     Stock_Merge_All_Tables.objects.bulk_create(records, batch_size=1000)
 
-    print("Данные успешно сохранены.")
+    print("Данные Stock_Merge_All_Tables сохранены.")
