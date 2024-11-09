@@ -1,3 +1,5 @@
+import time
+from datetime import timedelta
 from screener_daily_USA.parsing_data_from_tradingview_USA.data_overview import data_overview_get_stock_data
 from screener_daily_USA.parsing_data_from_tradingview_USA.data_performance import data_performance_get_stock_data
 from screener_daily_USA.parsing_data_from_tradingview_USA.data_valuation import data_valuation_get_stock_data
@@ -13,9 +15,10 @@ from screener_daily_USA.update_stock_data_USA.merge_all_tables import merge_tabl
 
 from screener_website.celery_app import app
 
-
 @app.task
 def calculate_results_USA():
+    start_time = time.time()  
+
     data_overview_get_stock_data()
     data_performance_get_stock_data()
     data_valuation_get_stock_data()
@@ -31,4 +34,7 @@ def calculate_results_USA():
     merged_data = merge_tables()
     save_merge_tables_to_db(merged_data)
 
-    print('Селери таска завершена, данные акций США обновлены')  
+    end_time = time.time()  
+    elapsed_time = end_time - start_time  
+    elapsed_time_formatted = str(timedelta(seconds=elapsed_time))
+    print(f'Селери таска завершена, данные акций США обновлены. Время выполнения: {elapsed_time_formatted}')

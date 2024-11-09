@@ -19,7 +19,7 @@ def get_new_data(symbol, exchange, interval):
     key = (symbol, exchange)
 
     try:
-        data = tv.get_hist(symbol, exchange=exchange, interval=interval, n_bars=500)
+        data = tv.get_hist(symbol, exchange=exchange, interval=interval, n_bars=300)
         if data is not None and not data.empty:
             # Обновление существующего DataFrame (объединение с новыми данными)
             loaded_data[key] = pd.concat([loaded_data[key], data], ignore_index=True)

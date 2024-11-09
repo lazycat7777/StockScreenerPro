@@ -14,7 +14,7 @@ source /ctr-py-venv/bin/activate
 # python manage.py save_NDX_components
 # python manage.py save_stock_data_indicators
 # python manage.py save_merge_tables
-# python manage.py runserver 0.0.0.0:18080
+python manage.py runserver 0.0.0.0:18080
 
 
 
