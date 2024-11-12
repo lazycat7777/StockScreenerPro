@@ -580,7 +580,7 @@
                                     
                                     
                                     
-                                    <button class="btn btn-primary dropdown-toggle" id="toggleDropdown" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Выбрать колонки</button>
+                                    <button class="btn btn-primary dropdown-toggle" id="toggleDropdown" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Columns</button>
                                     <div id="dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <label class="dropdown-item">
                                             <input type="checkbox" value="symbol" checked> Symbol
@@ -621,8 +621,7 @@
                                     </div>
                                     
                             
-                                {% comment %} <div class="export-buttons"> {% endcomment %}
-                                    <button class="btn btn-primary" id="exportCsv">Экспорт в CSV</button>
+                                    <button class="btn btn-primary" id="exportCsv">Export to CSV</button>
                                 </div>
 
                                 <div class="mb-3">
@@ -633,20 +632,162 @@
                                 <script>
                                     document.addEventListener('DOMContentLoaded', function() {
                                         var columnDefs = [
-                                            { headerName: "Symbol", field: "symbol", filter: true },
-                                            { headerName: "Exchange", field: "exchange", filter: true },
-                                            { headerName: "Price", field: "price", filter: true },
-                                            { headerName: "ADR %", field: "ADR_percent", filter: true },
-                                            { headerName: "SMA 10", field: "SMA_10", filter: true },
-                                            { headerName: "SMA 20", field: "SMA_20", filter: true },
-                                            { headerName: "SMA 50", field: "SMA_50", filter: true },
-                                            { headerName: "SMA 100", field: "SMA_100", filter: true },
-                                            { headerName: "SMA 150", field: "SMA_150", filter: true },
-                                            { headerName: "SMA 200", field: "SMA_200", filter: true },
-                                            { headerName: "EMA", field: "ema", filter: true },
-                                            { headerName: "RSI", field: "rsi", filter: true }
+                                            // Основная информация
+                                            { headerName: "Symbol", field: "name", filter: true, valueFormatter: textFormatter },
+                                            { headerName: "Exchange", field: "exchange", filter: true, valueFormatter: textFormatter },
+                                            { headerName: "Name", field: "description", filter: true, valueFormatter: textFormatter },
+                                            { headerName: "Sector", field: "sector", filter: true, valueFormatter: textFormatter },
+                                            // Index Component
+                                            { headerName: "S&P 500 Index Component", field: "spx_components", filter: true, valueFormatter: textFormatter },
+                                            { headerName: "NASDAQ 100 Index Component", field: "ndx_components", filter: true, valueFormatter: textFormatter },
+                                            // Цена и изменение цены
+                                            { headerName: "Price", field: "close", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "Change %", field: "change", filter: true, valueFormatter: percentageFormatter },
+                                            // Индикаторы (Indicators)
+                                            { headerName: "ADR %", field: "ADR_percent", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "SMA 10", field: "SMA_10", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "SMA 20", field: "SMA_20", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "SMA 50", field: "SMA_50", filter: true, valueFormatter: numberFormatter},
+                                            { headerName: "SMA 100", field: "SMA_100", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "SMA 150", field: "SMA_150", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "SMA 200", field: "SMA_200", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "High 10", field: "high_10", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "High 20", field: "high_20", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "High 50", field: "high_50", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "High 100", field: "high_100", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "High 150", field: "high_150", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "High 200", field: "high_200", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "High 1Y", field: "high_1y", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "Low 10", field: "low_10", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "Low 20", field: "low_20", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "Low 50", field: "low_50", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "Low 100", field: "low_100", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "Low 150", field: "low_150", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "Low 200", field: "low_200", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "Low 1Y", field: "low_1y", filter: true, valueFormatter: numberFormatter },
+                                            // Overview
+                                            { headerName: "Volume", field: "volume", filter: true, valueFormatter: shortNumberFormatter },
+                                            { headerName: "Relative Volume 1 day", field: "relative_volume_10d_calc", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "Market Cap", field: "market_cap_basic", filter: true, valueFormatter: shortNumberFormatter },
+                                            { headerName: "P/E", field: "price_earnings_ttm", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "EPS diluted TTM", field: "earnings_per_share_diluted_ttm", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "EPS diluted growth %, TTM YoY", field: "earnings_per_share_diluted_yoy_growth_ttm", filter: true, valueFormatter: percentageFormatter },
+                                            { headerName: "Dividend Yield %, TTM", field: "dividends_yield_current", filter: true, valueFormatter: percentageFormatter },
+                                            // Performance
+                                            { headerName: "Perf %, 1W", field: "perf_w", filter: true, valueFormatter: percentageFormatter },
+                                            { headerName: "Perf %, 1M", field: "perf_1m", filter: true, valueFormatter: percentageFormatter },
+                                            { headerName: "Perf %, 3M", field: "perf_3m", filter: true, valueFormatter: percentageFormatter },
+                                            { headerName: "Perf %, 6M", field: "perf_6m", filter: true, valueFormatter: percentageFormatter },
+                                            { headerName: "Perf %, YTD", field: "perf_ytd", filter: true, valueFormatter: percentageFormatter },
+                                            { headerName: "Perf %, 1Y", field: "perf_y", filter: true, valueFormatter: percentageFormatter },
+                                            { headerName: "Perf %, 5Y", field: "perf_5y", filter: true, valueFormatter: percentageFormatter },
+                                            { headerName: "Perf %, 10Y", field: "perf_10y", filter: true, valueFormatter: percentageFormatter },
+                                            { headerName: "Perf %, All Time", field: "perf_all", filter: true, valueFormatter: percentageFormatter },
+                                            { headerName: "Volatility %, 1W", field: "volatility_w", filter: true, valueFormatter: percentageFormatter },
+                                            { headerName: "Volatility %, 1M", field: "volatility_m", filter: true, valueFormatter: percentageFormatter },
+                                            // Valuation
+                                            { headerName: "Market Cap Perf %, 1Y", field: "perf_1y_market_cap", filter: true, valueFormatter: percentageFormatter },
+                                            { headerName: "PEG TTM", field: "price_earnings_growth_ttm", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "P/S", field: "price_sales_current", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "P/B", field: "price_book_fq", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "P/CF", field: "price_to_cash_f_operating_activities_ttm", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "P/FCF", field: "price_free_cash_flow_ttm", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "Price / Cash", field: "price_to_cash_ratio", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "EV", field: "enterprise_value_current", filter: true, valueFormatter: shortNumberFormatter },
+                                            { headerName: "EV / Revenue TTM", field: "enterprise_value_to_revenue_ttm", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "EV / EBIT TTM", field: "enterprise_value_to_ebit_ttm", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "EV / EBITDA TTM", field: "enterprise_value_ebitda_ttm", filter: true, valueFormatter: numberFormatter },
+                                            // Dividends
+                                            { headerName: "Div per share, FY", field: "dps_common_stock_prim_issue_fy", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "Div per share, FQ", field: "dps_common_stock_prim_issue_fq", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "Div yield %, TTM", field: "dividends_yield", filter: true, valueFormatter: percentageFormatter },
+                                            { headerName: "Div payout ratio %, TTM", field: "dividend_payout_ratio_ttm", filter: true, valueFormatter: percentageFormatter },
+                                            { headerName: "DPS growth, Annual YoY", field: "dps_common_stock_prim_issue_yoy_growth_fy", filter: true, valueFormatter: percentageFormatter },
+                                            { headerName: "Continuous Dividend Payout", field: "continuous_dividend_payout", filter: true, valueFormatter: numberFormatter_0 },
+                                            { headerName: "Continuous Dividend Growth", field: "continuous_dividend_growth", filter: true, valueFormatter: numberFormatter_0 },
+                                            // Profitability
+                                            { headerName: "Gross Margin, TTM", field: "gross_margin_ttm", filter: true, valueFormatter: percentageFormatter },
+                                            { headerName: "Operating Margin, TTM", field: "operating_margin_ttm", filter: true, valueFormatter: percentageFormatter },
+                                            { headerName: "Pretax Margin, TTM", field: "pre_tax_margin_ttm", filter: true, valueFormatter: percentageFormatter },
+                                            { headerName: "Net Margin, TTM", field: "net_margin_ttm", filter: true, valueFormatter: percentageFormatter },
+                                            { headerName: "FCF Margin, TTM", field: "free_cash_flow_margin_ttm", filter: true, valueFormatter: percentageFormatter },
+                                            { headerName: "ROA, TTM", field: "return_on_assets_fq", filter: true, valueFormatter: percentageFormatter },
+                                            { headerName: "ROE, TTM", field: "return_on_equity_fq", filter: true, valueFormatter: percentageFormatter },
+                                            { headerName: "ROIC, TTM", field: "return_on_invested_capital_fq", filter: true, valueFormatter: percentageFormatter },
+                                            { headerName: "R&D ratio, TTM", field: "research_and_dev_ratio_ttm", filter: true, valueFormatter: percentageFormatter },
+                                            { headerName: "SG&A ratio, TTM", field: "sell_gen_admin_exp_other_ratio_ttm", filter: true, valueFormatter: percentageFormatter },
+                                            // Income Statement
+                                            { headerName: "Revenue, TTM", field: "total_revenue_ttm", filter: true, valueFormatter: shortNumberFormatter },
+                                            { headerName: "Revenue growth, TTM YoY", field: "total_revenue_yoy_growth_ttm", filter: true, valueFormatter: percentageFormatter },
+                                            { headerName: "Gross profit, TTM", field: "gross_profit_ttm", filter: true, valueFormatter: shortNumberFormatter },
+                                            { headerName: "Operating income, TTM", field: "oper_income_ttm", filter: true, valueFormatter: shortNumberFormatter },
+                                            { headerName: "Net Income, TTM", field: "net_income_ttm", filter: true, valueFormatter: shortNumberFormatter },
+                                            { headerName: "EBITDA, TTM", field: "ebitda_ttm", filter: true, valueFormatter: shortNumberFormatter },
+                                            // Balance Sheet
+                                            { headerName: "Total Assets, FQ", field: "total_assets_fq", filter: true, valueFormatter: shortNumberFormatter },
+                                            { headerName: "Current Assets, FQ", field: "total_current_assets_fq", filter: true, valueFormatter: shortNumberFormatter },
+                                            { headerName: "Cash and Short Term Investment, FQ", field: "cash_n_short_term_invest_fq", filter: true, valueFormatter: shortNumberFormatter },
+                                            { headerName: "Total Liabilities, FQ", field: "total_liabilities_fq", filter: true, valueFormatter: shortNumberFormatter },
+                                            { headerName: "Total Debt, FQ", field: "total_debt_fq", filter: true, valueFormatter: shortNumberFormatter },
+                                            { headerName: "Net Debt, FQ", field: "net_debt_fq", filter: true, valueFormatter: shortNumberFormatter },
+                                            { headerName: "Total Equity, FQ", field: "total_equity_fq", filter: true, valueFormatter: shortNumberFormatter },
+                                            { headerName: "Current Ratio, FQ", field: "current_ratio_fq", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "Quick Ratio, FQ", field: "quick_ratio_fq", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "Debt / Equity, FQ", field: "debt_to_equity_fq", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "Cash / Debt, FQ", field: "cash_n_short_term_invest_to_total_debt_fq", filter: true, valueFormatter: numberFormatter },
+                                            // Cash Flow
+                                            { headerName: "Operating CF, TTM", field: "cash_f_operating_activities_ttm", filter: true, valueFormatter: shortNumberFormatter },
+                                            { headerName: "Investing CF, TTM", field: "cash_f_investing_activities_ttm", filter: true, valueFormatter: shortNumberFormatter },
+                                            { headerName: "Financing CF, TTM", field: "cash_f_financing_activities_ttm", filter: true, valueFormatter: shortNumberFormatter },
+                                            { headerName: "FCF, TTM", field: "free_cash_flow_ttm", filter: true, valueFormatter: shortNumberFormatter },
+                                            { headerName: "CAPEX, TTM", field: "capital_expenditures_ttm", filter: true, valueFormatter: shortNumberFormatter },
                                         ];
-                            
+                                        
+                                        // Форматтер для текстовых полей
+                                        function textFormatter(params) {
+                                            return params.value != null && params.value.trim() !== '' ? params.value : '-';
+                                        }
+
+                                        // Форматтер для обычных числовых полей с 0 знаками после запятой без %
+                                        function numberFormatter_0(params) {
+                                            return params.value != null ? params.value.toFixed(0) : '-';
+                                        }
+
+                                        // Форматтер для обычных числовых полей с 2 знаками после запятой без %
+                                        function numberFormatter(params) {
+                                            return params.value != null ? params.value.toFixed(2) : '-';
+                                        }
+                                        
+                                        // Форматтер для полей, где требуется знак % и 2 знака после запятой
+                                        function percentageFormatter(params) {
+                                            return params.value != null ? params.value.toFixed(2) + '%' : '-';
+                                        }
+
+                                        // Форматтер больших чисел
+                                        // пробелы между тысячами
+                                        function largeNumberFormatter(params) {
+                                            return params.value != null ? params.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : '-';
+                                        }
+                                        
+                                        // сокращение до трлн, млрд, млн, тыс 
+                                        function shortNumberFormatter(params) {
+                                            if (params.value == null) return '-';
+                                            let value = params.value;
+                                            const absValue = Math.abs(value); // абсолютное значение для определения диапазона
+                                            
+                                            if (absValue >= 1e12) {
+                                                return (value / 1e12).toFixed(3) + ' T'; // триллионы
+                                            } else if (absValue >= 1e9) {
+                                                return (value / 1e9).toFixed(3) + ' B'; // миллиарды
+                                            } else if (absValue >= 1e6) {
+                                                return (value / 1e6).toFixed(3) + ' M'; // миллионы
+                                            } else if (absValue >= 1e3) {
+                                                return (value / 1e3).toFixed(3) + ' K'; // тысячи
+                                            } else {
+                                                return value; // для чисел меньше 1000
+                                            }
+                                        }
+                                        
                                         // Преобразуем данные из представления Django
                                         var rowData = JSON.parse('{{ data|escapejs }}');
                             
