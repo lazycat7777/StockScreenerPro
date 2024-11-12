@@ -574,23 +574,43 @@
                             <div class="card-header">Data</div>
                             <div class="card-body">
                                 <div>
-                                    
-
-
-                                    
-                                    
-                                    
-                                    <button class="btn btn-primary dropdown-toggle" id="toggleDropdown" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Columns</button>
+                                                                      
+                                    <button class="btn btn-primary dropdown-toggle" id="toggleDropdown" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Overview</button>
                                     <div id="dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <label class="dropdown-item">
-                                            <input type="checkbox" value="symbol" checked> Symbol
+                                            <input type="checkbox" value="name" checked> Symbol
                                         </label>
                                         <label class="dropdown-item">
                                             <input type="checkbox" value="exchange" checked> Exchange
                                         </label>
                                         <label class="dropdown-item">
-                                            <input type="checkbox" value="price" checked> Price
+                                            <input type="checkbox" value="description" checked> Name
                                         </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="sector" checked> Sector
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="spx_components" checked> S&P 500 Index Component
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="ndx_components" checked> NASDAQ 100 Index Component
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="close" checked> Price
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="change" checked> Change %
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="volume" checked> Volume
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="relative_volume_10d_calc" checked> Relative Volume 1 day
+                                        </label>
+                                    </div>
+                                    
+                                    <button class="btn btn-primary dropdown-toggle" id="toggleDropdown" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Indicators</button>
+                                    <div id="dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <label class="dropdown-item">
                                             <input type="checkbox" value="ADR_percent" checked> ADR %
                                         </label>
@@ -613,14 +633,275 @@
                                             <input type="checkbox" value="SMA_200" checked> SMA 200
                                         </label>
                                         <label class="dropdown-item">
-                                            <input type="checkbox" value="ema" checked> EMA
+                                            <input type="checkbox" value="high_10" checked> High 10
                                         </label>
                                         <label class="dropdown-item">
-                                            <input type="checkbox" value="rsi" checked> RSI
+                                            <input type="checkbox" value="high_20" checked> High 20
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="high_50" checked> High 50
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="high_100" checked> High 100
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="high_150" checked> High 150
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="high_200" checked> High 200
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="high_1y" checked> High 1Y
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="low_10" checked> Low 10
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="low_20" checked> Low 20
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="low_50" checked> Low 50
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="low_100" checked> Low 100
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="low_150" checked> Low 150
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="low_200" checked> Low 200
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="low_1y" checked> Low 1Y
                                         </label>
                                     </div>
-                                    
-                            
+
+                                    <button class="btn btn-primary dropdown-toggle" id="toggleDropdown" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Performance</button>
+                                    <div id="dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="perf_w" checked> Perf %, 1W
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="perf_1m" checked> Perf %, 1M
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="perf_3m" checked> Perf %, 3M
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="perf_6m" checked> Perf %, 6M
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="perf_ytd" checked> Perf %, YTD
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="perf_y" checked> Perf %, 1Y
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="perf_5y" checked> Perf %, 5Y
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="perf_10y" checked> Perf %, 10Y
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="perf_all" checked> Perf %, All Time
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="volatility_w" checked> Volatility %, 1W
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="volatility_m" checked> Volatility %, 1M
+                                        </label>
+                                    </div>
+
+                                    <button class="btn btn-primary dropdown-toggle" id="toggleDropdown" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Valuation</button>
+                                    <div id="dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="market_cap_basic" checked> Market Cap
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="perf_1y_market_cap" checked> Market Cap Perf %, 1Y
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="price_earnings_ttm" checked> P/E
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="price_earnings_growth_ttm" checked> PEG TTM
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="price_sales_current" checked> P/S
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="price_book_fq" checked> P/B
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="price_to_cash_f_operating_activities_ttm" checked> P/CF
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="price_free_cash_flow_ttm" checked> P/FCF
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="price_to_cash_ratio" checked> Price / Cash
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="enterprise_value_current" checked> EV
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="enterprise_value_to_revenue_ttm" checked> EV / Revenue TTM
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="enterprise_value_to_ebit_ttm" checked> EV / EBIT TTM
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="enterprise_value_ebitda_ttm" checked> EV / EBITDA TTM
+                                        </label>
+                                    </div>
+
+                                    <button class="btn btn-primary dropdown-toggle" id="toggleDropdown" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dividends</button>
+                                    <div id="dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="dps_common_stock_prim_issue_fy" checked> Div per share, FY
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="dps_common_stock_prim_issue_fq" checked> Div per share, FQ
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="dividends_yield_current" checked> Div yield %, TTM
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="dividends_yield" checked> Div yield % (indicated)
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="dividend_payout_ratio_ttm" checked> Div payout ratio %, TTM
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="dps_common_stock_prim_issue_yoy_growth_fy" checked> DPS growth, Annual YoY
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="continuous_dividend_payout" checked> Continuous Dividend Payout
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="continuous_dividend_growth" checked> Continuous Dividend Growth
+                                        </label>
+                                    </div>
+
+                                    <button class="btn btn-primary dropdown-toggle" id="toggleDropdown" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profitability</button>
+                                    <div id="dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="gross_margin_ttm" checked> Gross Margin, TTM
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="operating_margin_ttm" checked> Operating Margin, TTM
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="pre_tax_margin_ttm" checked> Pretax Margin, TTM
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="net_margin_ttm" checked> Net Margin, TTM
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="free_cash_flow_margin_ttm" checked> FCF Margin, TTM
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="return_on_assets_fq" checked> ROA, TTM
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="return_on_equity_fq" checked> ROE, TTM
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="return_on_invested_capital_fq" checked> ROIC, TTM
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="research_and_dev_ratio_ttm" checked> R&D ratio, TTM
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="sell_gen_admin_exp_other_ratio_ttm" checked> SG&A ratio, TTM
+                                        </label>
+                                    </div>
+
+                                    <button class="btn btn-primary dropdown-toggle" id="toggleDropdown" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Income Statement</button>
+                                    <div id="dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="total_revenue_ttm" checked> Revenue, TTM
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="total_revenue_yoy_growth_ttm" checked> Revenue growth, TTM YoY
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="gross_profit_ttm" checked> Gross profit, TTM
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="oper_income_ttm" checked> Operating income, TTM
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="net_income_ttm" checked> Net Income, TTM
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="ebitda_ttm" checked> EBITDA, TTM
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="earnings_per_share_diluted_ttm" checked> EPS diluted, TTM
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="earnings_per_share_diluted_yoy_growth_ttm" checked> EPS diluted growth %, TTM YoY
+                                        </label>
+                                    </div>
+
+                                    <button class="btn btn-primary dropdown-toggle" id="toggleDropdown" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Balance Sheet</button>
+                                    <div id="dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="total_assets_fq" checked> Total Assets, FQ
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="total_current_assets_fq" checked> Current Assets, FQ
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="cash_n_short_term_invest_fq" checked> Cash and Short Term Investment, FQ
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="total_liabilities_fq" checked> Total Liabilities, FQ
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="total_debt_fq" checked> Total Debt, FQ
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="net_debt_fq" checked> Net Debt, FQ
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="total_equity_fq" checked> Total Equity, FQ
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="current_ratio_fq" checked> Current Ratio, FQ
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="quick_ratio_fq" checked> Quick Ratio, FQ
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="debt_to_equity_fq" checked> Debt / Equity, FQ
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="cash_n_short_term_invest_to_total_debt_fq" checked> Cash / Debt, FQ
+                                        </label>
+                                    </div>
+
+                                    <button class="btn btn-primary dropdown-toggle" id="toggleDropdown" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cash Flow</button>
+                                    <div id="dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="cash_f_operating_activities_ttm" checked> Operating CF, TTM
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="cash_f_investing_activities_ttm" checked> Investing CF, TTM
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="cash_f_financing_activities_ttm" checked> Financing CF, TTM
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="free_cash_flow_ttm" checked> FCF, TTM
+                                        </label>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" value="capital_expenditures_ttm" checked> CAPEX, TTM
+                                        </label>
+                                    </div>
+
                                     <button class="btn btn-primary" id="exportCsv">Export to CSV</button>
                                 </div>
 
@@ -668,11 +949,6 @@
                                             // Overview
                                             { headerName: "Volume", field: "volume", filter: true, valueFormatter: shortNumberFormatter },
                                             { headerName: "Relative Volume 1 day", field: "relative_volume_10d_calc", filter: true, valueFormatter: numberFormatter },
-                                            { headerName: "Market Cap", field: "market_cap_basic", filter: true, valueFormatter: shortNumberFormatter },
-                                            { headerName: "P/E", field: "price_earnings_ttm", filter: true, valueFormatter: numberFormatter },
-                                            { headerName: "EPS diluted TTM", field: "earnings_per_share_diluted_ttm", filter: true, valueFormatter: numberFormatter },
-                                            { headerName: "EPS diluted growth %, TTM YoY", field: "earnings_per_share_diluted_yoy_growth_ttm", filter: true, valueFormatter: percentageFormatter },
-                                            { headerName: "Dividend Yield %, TTM", field: "dividends_yield_current", filter: true, valueFormatter: percentageFormatter },
                                             // Performance
                                             { headerName: "Perf %, 1W", field: "perf_w", filter: true, valueFormatter: percentageFormatter },
                                             { headerName: "Perf %, 1M", field: "perf_1m", filter: true, valueFormatter: percentageFormatter },
@@ -686,7 +962,9 @@
                                             { headerName: "Volatility %, 1W", field: "volatility_w", filter: true, valueFormatter: percentageFormatter },
                                             { headerName: "Volatility %, 1M", field: "volatility_m", filter: true, valueFormatter: percentageFormatter },
                                             // Valuation
+                                            { headerName: "Market Cap", field: "market_cap_basic", filter: true, valueFormatter: shortNumberFormatter },
                                             { headerName: "Market Cap Perf %, 1Y", field: "perf_1y_market_cap", filter: true, valueFormatter: percentageFormatter },
+                                            { headerName: "P/E", field: "price_earnings_ttm", filter: true, valueFormatter: numberFormatter },
                                             { headerName: "PEG TTM", field: "price_earnings_growth_ttm", filter: true, valueFormatter: numberFormatter },
                                             { headerName: "P/S", field: "price_sales_current", filter: true, valueFormatter: numberFormatter },
                                             { headerName: "P/B", field: "price_book_fq", filter: true, valueFormatter: numberFormatter },
@@ -700,7 +978,8 @@
                                             // Dividends
                                             { headerName: "Div per share, FY", field: "dps_common_stock_prim_issue_fy", filter: true, valueFormatter: numberFormatter },
                                             { headerName: "Div per share, FQ", field: "dps_common_stock_prim_issue_fq", filter: true, valueFormatter: numberFormatter },
-                                            { headerName: "Div yield %, TTM", field: "dividends_yield", filter: true, valueFormatter: percentageFormatter },
+                                            { headerName: "Div yield %, TTM", field: "dividends_yield_current", filter: true, valueFormatter: percentageFormatter },
+                                            { headerName: "Div yield % (indicated)", field: "dividends_yield", filter: true, valueFormatter: percentageFormatter },
                                             { headerName: "Div payout ratio %, TTM", field: "dividend_payout_ratio_ttm", filter: true, valueFormatter: percentageFormatter },
                                             { headerName: "DPS growth, Annual YoY", field: "dps_common_stock_prim_issue_yoy_growth_fy", filter: true, valueFormatter: percentageFormatter },
                                             { headerName: "Continuous Dividend Payout", field: "continuous_dividend_payout", filter: true, valueFormatter: numberFormatter_0 },
@@ -723,6 +1002,8 @@
                                             { headerName: "Operating income, TTM", field: "oper_income_ttm", filter: true, valueFormatter: shortNumberFormatter },
                                             { headerName: "Net Income, TTM", field: "net_income_ttm", filter: true, valueFormatter: shortNumberFormatter },
                                             { headerName: "EBITDA, TTM", field: "ebitda_ttm", filter: true, valueFormatter: shortNumberFormatter },
+                                            { headerName: "EPS diluted TTM", field: "earnings_per_share_diluted_ttm", filter: true, valueFormatter: numberFormatter },
+                                            { headerName: "EPS diluted growth %, TTM YoY", field: "earnings_per_share_diluted_yoy_growth_ttm", filter: true, valueFormatter: percentageFormatter },
                                             // Balance Sheet
                                             { headerName: "Total Assets, FQ", field: "total_assets_fq", filter: true, valueFormatter: shortNumberFormatter },
                                             { headerName: "Current Assets, FQ", field: "total_current_assets_fq", filter: true, valueFormatter: shortNumberFormatter },
