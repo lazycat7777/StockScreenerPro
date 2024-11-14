@@ -574,7 +574,20 @@
                             <div class="card-header">Data</div>
                             <div class="card-body">
                                 <div>
-                                                                      
+                                    
+                                    <button class="btn btn-primary dropdown-toggle" type="button" id="singleColumnDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Quick filters
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="singleColumnDropdown">
+                                        <li><a class="dropdown-item column-option" data-column="quick_filter_any">Any</a></li>
+                                        <li><a class="dropdown-item column-option" data-column="quick_filter_1">ADR% > 3.5, SMA10 > SMA20, SMA20 > SMA50, SMA50 > SMA100, SMA100 > SMA200</a></li>
+                                        <li><a class="dropdown-item column-option" data-column="quick_filter_2">ADR% > 3.5, SMA20 > SMA50, SMA50 > SMA100, SMA100 > SMA200</a></li>
+                                        <li><a class="dropdown-item column-option" data-column="quick_filter_3">ADR% > 3.5, SMA50 > SMA100, SMA100 > SMA200</a></li>
+                                        <li><a class="dropdown-item column-option" data-column="quick_filter_4">SMA10 > SMA20, SMA20 > SMA50, SMA50 > SMA100, SMA100 > SMA200</a></li>
+                                        <li><a class="dropdown-item column-option" data-column="quick_filter_5">SMA20 > SMA50, SMA50 > SMA100, SMA100 > SMA200</a></li>
+                                        <li><a class="dropdown-item column-option" data-column="quick_filter_6">SMA50 > SMA100, SMA100 > SMA200</a></li>
+                                    </ul>
+
                                     <button class="btn btn-primary dropdown-toggle" id="toggleDropdown" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Overview</button>
                                     <div id="dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <label class="dropdown-item">
@@ -1022,6 +1035,13 @@
                                             { headerName: "Financing CF, TTM", field: "cash_f_financing_activities_ttm", filter: true, valueFormatter: shortNumberFormatter },
                                             { headerName: "FCF, TTM", field: "free_cash_flow_ttm", filter: true, valueFormatter: shortNumberFormatter },
                                             { headerName: "CAPEX, TTM", field: "capital_expenditures_ttm", filter: true, valueFormatter: shortNumberFormatter },
+                                            // Quick Filters
+                                            { headerName: "quick_filter_1", field: "quick_filter_1", filter: true, valueFormatter: numberFormatter_0 },
+                                            { headerName: "quick_filter_2", field: "quick_filter_2", filter: true, valueFormatter: numberFormatter_0 },
+                                            { headerName: "quick_filter_3", field: "quick_filter_3", filter: true, valueFormatter: numberFormatter_0 },
+                                            { headerName: "quick_filter_4", field: "quick_filter_4", filter: true, valueFormatter: numberFormatter_0 },
+                                            { headerName: "quick_filter_5", field: "quick_filter_5", filter: true, valueFormatter: numberFormatter_0 },
+                                            { headerName: "quick_filter_6", field: "quick_filter_6", filter: true, valueFormatter: numberFormatter_0 },
                                         ];
                                         
                                         // Форматтер для текстовых полей
@@ -1074,7 +1094,7 @@
 
                                         // Проверяем, что данные не пустые
                                         if (!Array.isArray(rowData) || rowData.length === 0) {
-                                            console.error("Нет данных для отображения. Проверьте, что данные передаются из Django.");
+                                            console.error("Нет данных для отображения.");
                                             return; // Выходим, если данных нет
                                         }
 
@@ -1090,15 +1110,16 @@
                                                 resizable: true, // Разрешаем изменение ширины столбцов
                                             },
                                             onGridReady: function(params) {
-                                                // Этот метод срабатывает после того, как сетка готова
-                                                var gridApi = params.api; // Получаем api из параметров события onGridReady
+                                                window.gridApi = params.api;
+                                                window.columnApi = params.columnApi;
+                                                
+                                                // Скрываем столбцы
+                                                gridApi.setColumnsVisible(
+                                                    ["quick_filter_1", "quick_filter_2", "quick_filter_3", "quick_filter_4", "quick_filter_5", "quick_filter_6"],
+                                                    false
+                                                );
+
                                                 gridApi.sizeColumnsToFit(); // Подгоняем ширину столбцов по доступному пространству
-                                            },
-                                            onFirstDataRendered: function(params) {
-                                                // Этот метод срабатывает, когда данные впервые отрендерены
-                                                var gridApi = params.api; // Получаем api из параметров события onFirstDataRendered
-                                                var allColumns = gridApi.getAllColumns(); // Получаем все столбцы
-                                                gridApi.autoSizeColumns(allColumns); // Подгоняем ширину всех столбцов под их контент
                                             }
                                         };
 
@@ -1159,7 +1180,39 @@
                                             URL.revokeObjectURL(url);
                                         }
 
-
+                                        // Быстрые фильтры
+                                        document.querySelectorAll('.column-option').forEach(function (item) {
+                                            item.addEventListener('click', function (event) {
+                                                const selectedFilter = event.target.getAttribute('data-column');
+                                                if (window.gridApi) {
+                                                    const filterModel = {};
+                                                    
+                                                    // Устанавливаем значения для quick_filter_1 - quick_filter_6 в зависимости от выбранного фильтра
+                                                    const filters = {
+                                                        quick_filter_any: { quick_filter_1: null, quick_filter_2: null, quick_filter_3: null, quick_filter_4: null, quick_filter_5: null, quick_filter_6: null },
+                                                        quick_filter_1: { quick_filter_1: 1, quick_filter_2: null, quick_filter_3: null, quick_filter_4: null, quick_filter_5: null, quick_filter_6: null },
+                                                        quick_filter_2: { quick_filter_1: null, quick_filter_2: 1, quick_filter_3: null, quick_filter_4: null, quick_filter_5: null, quick_filter_6: null },
+                                                        quick_filter_3: { quick_filter_1: null, quick_filter_2: null, quick_filter_3: 1, quick_filter_4: null, quick_filter_5: null, quick_filter_6: null },
+                                                        quick_filter_4: { quick_filter_1: null, quick_filter_2: null, quick_filter_3: null, quick_filter_4: 1, quick_filter_5: null, quick_filter_6: null },
+                                                        quick_filter_5: { quick_filter_1: null, quick_filter_2: null, quick_filter_3: null, quick_filter_4: null, quick_filter_5: 1, quick_filter_6: null },
+                                                        quick_filter_6: { quick_filter_1: null, quick_filter_2: null, quick_filter_3: null, quick_filter_4: null, quick_filter_5: null, quick_filter_6: 1 }
+                                                    };                                                    
+                                                    
+                                                    // Устанавливаем значения фильтров в зависимости от выбранного элемента
+                                                    Object.entries(filters[selectedFilter]).forEach(([column, value]) => {
+                                                        filterModel[column] = {
+                                                            filterType: 'number',
+                                                            type: 'equals',
+                                                            filter: value
+                                                        };
+                                                    });
+                                        
+                                                    // Применяем фильтры и обновляем сетку
+                                                    window.gridApi.setFilterModel(filterModel);
+                                                    window.gridApi.onFilterChanged();
+                                                } 
+                                            });
+                                        });
                                     });
                                 </script>
                             </div>

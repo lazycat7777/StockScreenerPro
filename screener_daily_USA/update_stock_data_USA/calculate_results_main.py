@@ -37,7 +37,13 @@ def calculate_and_aggregate_results():
         'Low_100',
         'Low_150',
         'Low_200',
-        'Low_1Y'
+        'Low_1Y',
+        'Quick_filter_1',
+        'Quick_filter_2',
+        'Quick_filter_3',
+        'Quick_filter_4',
+        'Quick_filter_5',
+        'Quick_filter_6'
     ])
 
     for symbol, exchange in symbols_and_exchanges:
@@ -68,7 +74,13 @@ def calculate_and_aggregate_results():
                 'Low_100': indicators_dict['Low_100'],
                 'Low_150': indicators_dict['Low_150'],
                 'Low_200': indicators_dict['Low_200'],
-                'Low_1Y': indicators_dict['Low_1Y']
+                'Low_1Y': indicators_dict['Low_1Y'],
+                'Quick_filter_1': indicators_dict['Quick_filter_1'],
+                'Quick_filter_2': indicators_dict['Quick_filter_2'],
+                'Quick_filter_3': indicators_dict['Quick_filter_3'],
+                'Quick_filter_4': indicators_dict['Quick_filter_4'],
+                'Quick_filter_5': indicators_dict['Quick_filter_5'],
+                'Quick_filter_6': indicators_dict['Quick_filter_6']
             })
 
     if results:
@@ -105,6 +117,12 @@ def calculate_and_aggregate_results():
                     low_150=round(vals['Low_150'], 2) if vals['Low_150'] is not None else None,
                     low_200=round(vals['Low_200'], 2) if vals['Low_200'] is not None else None,
                     low_1y=round(vals['Low_1Y'], 2) if vals['Low_1Y'] is not None else None,
+                    quick_filter_1=vals['Quick_filter_1'],
+                    quick_filter_2=vals['Quick_filter_2'],
+                    quick_filter_3=vals['Quick_filter_3'],
+                    quick_filter_4=vals['Quick_filter_4'],
+                    quick_filter_5=vals['Quick_filter_5'],
+                    quick_filter_6=vals['Quick_filter_6'],
                 )
             )
         Stock_Data_Indicators.objects.bulk_create(final_table_in_db)

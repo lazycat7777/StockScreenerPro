@@ -30,12 +30,14 @@ def calculate_indicators(data):
 
     return {
         'ADR_percent': adr_percent,
+        
         'SMA_10': SMA_10.iloc[-1],
         'SMA_20': SMA_20.iloc[-1],
         'SMA_50': SMA_50.iloc[-1],
         'SMA_100': SMA_100.iloc[-1],
         'SMA_150': SMA_150.iloc[-1],
         'SMA_200': SMA_200.iloc[-1],
+        
         'High_10': high_10,
         'High_20': high_20,
         'High_50': high_50,
@@ -43,11 +45,19 @@ def calculate_indicators(data):
         'High_150': high_150,
         'High_200': high_200,
         'High_1Y': high_1y,
+        
         'Low_10': low_10,
         'Low_20': low_20,
         'Low_50': low_50,
         'Low_100': low_100,
         'Low_150': low_150,
         'Low_200': low_200,
-        'Low_1Y': low_1y
+        'Low_1Y': low_1y,
+
+        'Quick_filter_1': 1 if adr_percent > 3.5 and SMA_10.iloc[-1] > SMA_20.iloc[-1] and SMA_20.iloc[-1] > SMA_50.iloc[-1] and SMA_50.iloc[-1] > SMA_100.iloc[-1] and SMA_100.iloc[-1] > SMA_200.iloc[-1] else 0,
+        'Quick_filter_2': 1 if adr_percent > 3.5 and SMA_20.iloc[-1] > SMA_50.iloc[-1] and SMA_50.iloc[-1] > SMA_100.iloc[-1] and SMA_100.iloc[-1] > SMA_200.iloc[-1] else 0,
+        'Quick_filter_3': 1 if adr_percent > 3.5 and SMA_50.iloc[-1] > SMA_100.iloc[-1] and SMA_100.iloc[-1] > SMA_200.iloc[-1] else 0,
+        'Quick_filter_4': 1 if SMA_10.iloc[-1] > SMA_20.iloc[-1] and SMA_20.iloc[-1] > SMA_50.iloc[-1] and SMA_50.iloc[-1] > SMA_100.iloc[-1] and SMA_100.iloc[-1] > SMA_200.iloc[-1] else 0,
+        'Quick_filter_5': 1 if SMA_20.iloc[-1] > SMA_50.iloc[-1] and SMA_50.iloc[-1] > SMA_100.iloc[-1] and SMA_100.iloc[-1] > SMA_200.iloc[-1] else 0,
+        'Quick_filter_6': 1 if SMA_50.iloc[-1] > SMA_100.iloc[-1] and SMA_100.iloc[-1] > SMA_200.iloc[-1] else 0
     }

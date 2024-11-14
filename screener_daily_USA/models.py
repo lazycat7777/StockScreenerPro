@@ -125,6 +125,12 @@ class Stock_Merge_All_Tables(models.Model):
     low_150 = models.FloatField(null=True)
     low_200 = models.FloatField(null=True)
     low_1y = models.FloatField(null=True)
+    quick_filter_1=models.FloatField(null=True)
+    quick_filter_2=models.FloatField(null=True)
+    quick_filter_3=models.FloatField(null=True)
+    quick_filter_4=models.FloatField(null=True)
+    quick_filter_5=models.FloatField(null=True)
+    quick_filter_6=models.FloatField(null=True)
 
     class Meta:
         app_label = 'screener_daily_USA'
@@ -154,6 +160,12 @@ class Stock_Data_Indicators(models.Model):
     low_150 = models.FloatField(null=True)
     low_200 = models.FloatField(null=True)
     low_1y = models.FloatField(null=True)
+    quick_filter_1=models.FloatField(null=True)
+    quick_filter_2=models.FloatField(null=True)
+    quick_filter_3=models.FloatField(null=True)
+    quick_filter_4=models.FloatField(null=True)
+    quick_filter_5=models.FloatField(null=True)
+    quick_filter_6=models.FloatField(null=True)
 
     class Meta:
         app_label = 'screener_daily_USA'

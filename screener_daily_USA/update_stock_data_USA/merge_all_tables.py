@@ -132,7 +132,8 @@ def merge_tables():
         'ADR_percent', 'SMA_10', 'SMA_20', 'SMA_50', 'SMA_100', 'SMA_150', 'SMA_200', 
         'high_10', 'high_20', 'high_50', 'high_100', 'high_150', 'high_200', 
         'high_1y', 'low_10', 'low_20', 'low_50', 'low_100', 'low_150', 
-        'low_200', 'low_1y'
+        'low_200', 'low_1y', 'quick_filter_1', 'quick_filter_2', 'quick_filter_3', 
+        'quick_filter_4', 'quick_filter_5', 'quick_filter_6'
     ]
     indicators_data = queryset_to_dataframe(
         Stock_Data_Indicators.objects.all().only('symbol', *indicators_columns),
@@ -263,7 +264,13 @@ def save_merge_tables_to_db(merged_data):
             low_100=row['low_100'],
             low_150=row['low_150'],
             low_200=row['low_200'],
-            low_1y=row['low_1y']
+            low_1y=row['low_1y'],
+            quick_filter_1=row['quick_filter_1'],
+            quick_filter_2=row['quick_filter_2'],
+            quick_filter_3=row['quick_filter_3'],
+            quick_filter_4=row['quick_filter_4'],
+            quick_filter_5=row['quick_filter_5'],
+            quick_filter_6=row['quick_filter_6']
         )
         for _, row in merged_data.iterrows()
     ]
