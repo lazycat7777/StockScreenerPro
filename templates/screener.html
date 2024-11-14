@@ -536,56 +536,11 @@
                             <div id="chartSection" style="display: none;">
                                 <div class="card mb-4">
                                     <div class="card-header">Charts</div>
-                                    <div class="card-body text-center">
-                                        <!-- Profile picture image-->
-
-                                        <!-- TradingView Widget BEGIN -->
-                                        <div class="tradingview-widget-container">
-                                            <div class="tradingview-widget-container__widget"></div>
-                                            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-                                            {
-                                            "width": "100%",
-                                            "height": "610",
-                                            "symbol": "NASDAQ:AAPL",
-                                            "interval": "D",
-                                            "timezone": "exchange",
-                                            "theme": "light",
-                                            "style": "1",
-                                            "locale": "en",
-                                            "withdateranges": true,
-                                            "hide_side_toolbar": false,
-                                            "allow_symbol_change": true,
-                                            "calendar": false,
-                                            "show_popup_button": true,
-                                            "popup_width": "1000",
-                                            "popup_height": "650",
-                                            "support_host": "https://www.tradingview.com"
-                                        }
-                                            </script>
-                                        </div>
-                                        <!-- TradingView Widget END -->
-                                        <div class="row">
-                                            <div class="mb-3">
-                                                </div>
-                                            <!-- TradingView Widget BEGIN -->
-                                            <div class="tradingview-widget-container">
-                                                <div class="tradingview-widget-container__widget"></div>
-                                                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-profile.js" async>
-                                                {
-                                                "width": "100%",
-                                                "height": 330,
-                                                "isTransparent": false,
-                                                "colorTheme": "light",
-                                                "symbol": "NASDAQ:AAPL",
-                                                "locale": "en"
-                                            }
-                                                </script>
-                                            </div>
-                                            <!-- TradingView Widget END -->
-
-
-
-                                        </div>
+                                    <div class="card-body" id="tradingViewContainer">
+                                        <!-- Контейнер для виджета графика -->
+                                    </div>
+                                    <div class="card-body" id="tradingViewProfileContainer">
+                                        <!-- Контейнер для виджета профиля компании -->
                                     </div>
                                 </div>
                             </div>
@@ -594,7 +549,7 @@
                                 <div class="card-body">
                                     <div>
                                         
-                                        <button class="btn btn-primary" id="open_charts">Open charts</button>
+                                        <button class="btn btn-primary" id="open_charts">Show/hide charts</button>
 
                                         <button class="btn btn-primary dropdown-toggle" type="button" id="singleColumnDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                             Quick filters
@@ -649,22 +604,22 @@
                                                 <input type="checkbox" value="ADR_percent" checked> ADR %
                                             </label>
                                             <label class="dropdown-item">
-                                                <input type="checkbox" value="SMA_10" checked> SMA 10
+                                                <input type="checkbox" value="SMA_10" > SMA 10
                                             </label>
                                             <label class="dropdown-item">
-                                                <input type="checkbox" value="SMA_20" checked> SMA 20
+                                                <input type="checkbox" value="SMA_20" > SMA 20
                                             </label>
                                             <label class="dropdown-item">
-                                                <input type="checkbox" value="SMA_50" checked> SMA 50
+                                                <input type="checkbox" value="SMA_50" > SMA 50
                                             </label>
                                             <label class="dropdown-item">
-                                                <input type="checkbox" value="SMA_100" checked> SMA 100
+                                                <input type="checkbox" value="SMA_100" > SMA 100
                                             </label>
                                             <label class="dropdown-item">
-                                                <input type="checkbox" value="SMA_150" checked> SMA 150
+                                                <input type="checkbox" value="SMA_150" > SMA 150
                                             </label>
                                             <label class="dropdown-item">
-                                                <input type="checkbox" value="SMA_200" checked> SMA 200
+                                                <input type="checkbox" value="SMA_200" > SMA 200
                                             </label>
                                             <label class="dropdown-item">
                                                 <input type="checkbox" value="high_10" > High 10
@@ -942,7 +897,7 @@
                                     <div class="mb-3">
                                     </div>
                                     
-                                    <div id="myGrid" class="ag-theme-quartz" style="height: 840px; width: 100%;"></div>
+                                    <div id="myGrid" class="ag-theme-quartz" style="height: 790px; width: 100%;"></div>
                                 
                                     <script>
                                         document.addEventListener('DOMContentLoaded', function() {
@@ -957,7 +912,24 @@
                                                         button.className = 'btn btn-light btn-xs';
                                                         button.innerText = 'Look at the chart';
                                                         button.addEventListener('click', function() {
-                                                            updateTradingViewSymbol(params.value); // Функция обновления символа в виджете
+                                                            var chartSection = document.getElementById('chartSection');
+                                                            var dataSection = document.getElementById('dataSection');
+                                                
+                                                            var chartSectionWidth = '30%';  // Ширина для chartSection
+                                                            var dataSectionWidth = '70%';   // Ширина для dataSection
+                                                
+                                                            // Проверяем, скрыта ли область chartSection, если да, то показываем
+                                                            if (chartSection.style.display === 'none' || chartSection.style.display === '') {
+                                                                chartSection.style.display = 'block'; // Показываем область
+                                                                chartSection.style.width = chartSectionWidth; // Устанавливаем ширину для chartSectionWidth
+                                                                dataSection.style.width = dataSectionWidth; // Устанавливаем уменьшенную ширину для dataSection
+                                                            }
+                                                
+                                                            // Функция обновления символа в виджете
+                                                            updateTradingViewSymbol(params.value);
+
+                                                            // После изменения размеров вызовем подгонку ширины столбцов
+                                                            window.gridApi.sizeColumnsToFit();
                                                         });
                                                         return button;
                                                     }
@@ -1249,6 +1221,7 @@
                                                 });
                                             });
 
+                                            // Скрытие/раскрытие графика
                                             document.getElementById('open_charts').addEventListener('click', function() {
                                                 var chartSection = document.getElementById('chartSection');
                                                 var dataSection = document.getElementById('dataSection');
@@ -1273,7 +1246,60 @@
                                             
                                                 // Изменяем ширину chartSection
                                                 chartSection.style.width = chartSectionWidth;
+
+                                                // После изменения размеров вызовем подгонку ширины столбцов
+                                                window.gridApi.sizeColumnsToFit();
                                             });
+
+                                            // Функция для обновления виджетов TradingView по символу
+                                            function updateTradingViewSymbol(symbol) {
+                                                // Обновление основного виджета
+                                                const tradingViewContainer = document.getElementById('tradingViewContainer');
+                                                tradingViewContainer.innerHTML = ""; // Очищаем контейнер
+
+                                                const script = document.createElement('script');
+                                                script.type = 'text/javascript';
+                                                script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js';
+                                                script.async = true;
+                                                script.text = JSON.stringify({
+                                                    "width": "100%",
+                                                    "height": "560",
+                                                    "symbol": symbol,
+                                                    "interval": "D",
+                                                    "timezone": "exchange",
+                                                    "theme": "light",
+                                                    "style": "1",
+                                                    "locale": "en",
+                                                    "withdateranges": true,
+                                                    "hide_side_toolbar": false,
+                                                    "allow_symbol_change": true,
+                                                    "calendar": false,
+                                                    "show_popup_button": true,
+                                                    "popup_width": "1000",
+                                                    "popup_height": "650"
+                                                });
+                                                
+                                                tradingViewContainer.appendChild(script);
+
+                                                // Обновление виджета профиля
+                                                const profileContainer = document.getElementById('tradingViewProfileContainer');
+                                                profileContainer.innerHTML = ""; // Очищаем контейнер
+
+                                                const profileScript = document.createElement('script');
+                                                profileScript.type = 'text/javascript';
+                                                profileScript.src = 'https://s3.tradingview.com/external-embedding/embed-widget-symbol-profile.js';
+                                                profileScript.async = true;
+                                                profileScript.text = JSON.stringify({
+                                                    "width": "100%",
+                                                    "height": 250,
+                                                    "isTransparent": false,
+                                                    "colorTheme": "light",
+                                                    "symbol": symbol,
+                                                    "locale": "en"
+                                                });
+                                                
+                                                profileContainer.appendChild(profileScript);
+                                            }
                                         });
                                     </script>
                                 </div>
