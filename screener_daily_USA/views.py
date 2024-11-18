@@ -10,3 +10,8 @@ def screener_html(request):
     data = list(stock_data) 
     return render(request, 'screener.html', {'data': json.dumps(data)}) 
 
+def stock_heatmap_SPX_html(request):
+    return render(request, 'stock_heatmap_SPX.html')
+
+def stock_heatmap_NDX_html(request):
+    return render(request, 'stock_heatmap_NDX.html')
