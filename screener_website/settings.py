@@ -39,11 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # third party libraries
     'django_extensions',
     'cachalot',
+    # 'django_email_verification',
     
-    'screener_daily_USA',
-    # 'django.contrib.postgres',
+    # apps
+    'screener_daily_USA.apps.ScreenerDailyUsaConfig',
+    # 'account.apps.AccountConfig',
 ]
 
 MIDDLEWARE = [
@@ -61,7 +64,7 @@ ROOT_URLCONF = 'screener_website.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR / 'screener_website' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

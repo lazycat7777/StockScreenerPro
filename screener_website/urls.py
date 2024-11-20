@@ -19,9 +19,13 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
+from . import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('screener_daily_USA.urls')),
+    path('screener_USA/', include('screener_daily_USA.urls')),
+    # path('account/', include('account.urls')),
+    path('', views.index_html, name='index'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
