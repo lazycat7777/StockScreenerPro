@@ -10,7 +10,11 @@ services:
       - ./static:/app/static
     env_file:
       - ./.env
-    command: bash entrypoint.sh
+    command: >
+      bash -c "source /ctr-py-venv/bin/activate &&
+      python manage.py makemigrations &&
+      python manage.py migrate &&
+      python manage.py runserver 0.0.0.0:18080"
     depends_on:
       - database
     networks:
@@ -97,6 +101,17 @@ services:
     command: >
       bash -c "source /ctr-py-venv/bin/activate &&
       celery -A screener_website flower --basic_auth=${FLOWER_USER}:${FLOWER_PASSWORD}"
+    networks:
+      - webapp_network
+
+  telegram_bot:
+    build: ./telegram_bot  
+    container_name: telegram_bot
+    volumes:
+      - ./telegram_bot:/app
+    env_file:
+      - ./.env      
+    command: python main.py
     networks:
       - webapp_network
 
