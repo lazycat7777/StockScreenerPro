@@ -42,11 +42,10 @@ INSTALLED_APPS = [
     # third party libraries
     'django_extensions',
     'cachalot',
-    # 'django_email_verification',
     
     # apps
     'screener_daily_USA.apps.ScreenerDailyUsaConfig',
-    # 'account.apps.AccountConfig',
+    'auth_telegram_bot.apps.AuthTelegramBotConfig',
 ]
 
 MIDDLEWARE = [

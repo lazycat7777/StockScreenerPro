@@ -14,5 +14,9 @@ app.conf.beat_schedule = {
     'calculate_results_USA': {
         'task': 'screener_daily_USA.tasks.calculate_results_USA',
         'schedule': crontab(minute=0, hour=3),
+    },
+    'cleanup_expired_ip_access': {
+        'task': 'auth_telegram_bot.tasks.remove_expired_ip_access',
+        'schedule': crontab(minute=0, hour=0),
     }
 }

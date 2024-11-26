@@ -24,7 +24,7 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('screener_USA/', include('screener_daily_USA.urls')),
-    # path('account/', include('account.urls')),
+    path('auth_telegram_bot/', include('auth_telegram_bot.urls')),
     path('', views.index_html, name='index'),
 ]
 
