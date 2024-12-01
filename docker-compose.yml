@@ -11,7 +11,8 @@ services:
     env_file:
       - ./.env
     command: >
-      bash -c "source /ctr-py-venv/bin/activate &&
+      bash -c "sleep 50 &&
+      source /ctr-py-venv/bin/activate &&
       python manage.py makemigrations &&
       python manage.py migrate &&
       python manage.py runserver 0.0.0.0:18080"
@@ -54,7 +55,8 @@ services:
       - webapp
       - database
     command: >
-      bash -c "source /ctr-py-venv/bin/activate &&
+      bash -c "sleep 100 &&
+      source /ctr-py-venv/bin/activate &&
       celery -A screener_website worker --loglevel=info"
     networks:
       - webapp_network
@@ -80,7 +82,8 @@ services:
       - worker
       - database
     command: >
-      bash -c "source /ctr-py-venv/bin/activate &&
+      bash -c "sleep 150 &&
+      source /ctr-py-venv/bin/activate &&
       celery -A screener_website beat --loglevel=info"
     networks:
       - webapp_network
@@ -99,7 +102,8 @@ services:
       - redis
       - worker
     command: >
-      bash -c "source /ctr-py-venv/bin/activate &&
+      bash -c "sleep 150 &&
+      source /ctr-py-venv/bin/activate &&
       celery -A screener_website flower --basic_auth=${FLOWER_USER}:${FLOWER_PASSWORD}"
     networks:
       - webapp_network

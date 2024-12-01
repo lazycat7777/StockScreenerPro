@@ -9,8 +9,8 @@
         <meta name="author" content="" />
         <title>Screener USA stock market</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
-        <link rel="icon" type="image/x-icon" href="{% static 'assets/img/favicon.png' %}" />
+        <link href="{% static 'pages/css/styles.css' %}" rel="stylesheet" />
+        <link rel="icon" type="image/x-icon" href="{% static 'pages/assets/img/favicon.png' %}" />
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
     
@@ -146,7 +146,7 @@
                         </h6>
                         <!-- Example Message 1  -->
                         <a class="dropdown-item dropdown-notifications-item" href="#!">
-                            <img class="dropdown-notifications-item-img" src={% static "assets/img/illustrations/profiles/profile-2.png" %} />
+                            <img class="dropdown-notifications-item-img" src={% static "pages/assets/img/illustrations/profiles/profile-2.png" %} />
                             <div class="dropdown-notifications-item-content">
                                 <div class="dropdown-notifications-item-content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
                                 <div class="dropdown-notifications-item-content-details">Thomas Wilcox · 58m</div>
@@ -154,7 +154,7 @@
                         </a>
                         <!-- Example Message 2-->
                         <a class="dropdown-item dropdown-notifications-item" href="#!">
-                            <img class="dropdown-notifications-item-img" src={% static "assets/img/illustrations/profiles/profile-3.png" %} />
+                            <img class="dropdown-notifications-item-img" src={% static "pages/assets/img/illustrations/profiles/profile-3.png" %} />
                             <div class="dropdown-notifications-item-content">
                                 <div class="dropdown-notifications-item-content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
                                 <div class="dropdown-notifications-item-content-details">Emily Fowler · 2d</div>
@@ -162,7 +162,7 @@
                         </a>
                         <!-- Example Message 3-->
                         <a class="dropdown-item dropdown-notifications-item" href="#!">
-                            <img class="dropdown-notifications-item-img" src={% static "assets/img/illustrations/profiles/profile-4.png" %} />
+                            <img class="dropdown-notifications-item-img" src={% static "pages/assets/img/illustrations/profiles/profile-4.png" %} />
                             <div class="dropdown-notifications-item-content">
                                 <div class="dropdown-notifications-item-content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
                                 <div class="dropdown-notifications-item-content-details">Marshall Rosencrantz · 3d</div>
@@ -170,7 +170,7 @@
                         </a>
                         <!-- Example Message 4-->
                         <a class="dropdown-item dropdown-notifications-item" href="#!">
-                            <img class="dropdown-notifications-item-img" src={% static "assets/img/illustrations/profiles/profile-5.png" %} />
+                            <img class="dropdown-notifications-item-img" src={% static "pages/assets/img/illustrations/profiles/profile-5.png" %} />
                             <div class="dropdown-notifications-item-content">
                                 <div class="dropdown-notifications-item-content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
                                 <div class="dropdown-notifications-item-content-details">Colby Newton · 3d</div>
@@ -185,7 +185,7 @@
                     <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="img-fluid" src={% static "assets/img/illustrations/profiles/profile-1.png" %} /></a>
                     <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
                         <h6 class="dropdown-header d-flex align-items-center">
-                            <img class="dropdown-user-img" src={% static "assets/img/illustrations/profiles/profile-1.png" %} />
+                            <img class="dropdown-user-img" src={% static "pages/assets/img/illustrations/profiles/profile-1.png" %} />
                             <div class="dropdown-user-details">
                                 <div class="dropdown-user-details-name">Valerie Luna</div>
                                 <div class="dropdown-user-details-email">vluna@aol.com</div>
@@ -236,12 +236,12 @@
                             </a>
                             <div class="collapse" id="collapseDashboards" data-bs-parent="#accordionSidenav">
                                 <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                                    <a class="nav-link" href={% static "dashboard-1.html" %}>
+                                    <a class="nav-link" href={% static "pages/dashboard-1.html" %}>
                                         Default
                                         <span class="badge bg-primary-soft text-primary ms-auto">Updated</span>
                                     </a>
-                                    <a class="nav-link" href={% static "dashboard-2.html" %}>Multipurpose</a>
-                                    <a class="nav-link" href={% static "dashboard-3.html" %}>Affiliate</a>
+                                    <a class="nav-link" href={% static "pages/dashboard-2.html" %}>Multipurpose</a>
+                                    <a class="nav-link" href={% static "pages/dashboard-3.html" %}>Affiliate</a>
                                 </nav>
                             </div>
                             <!-- Sidenav Heading (Custom)-->
@@ -261,10 +261,10 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseAccount" data-bs-parent="#accordionSidenavPagesMenu">
                                         <nav class="sidenav-menu-nested nav">
-                                            <a class="nav-link" href={% static "account-profile.html" %}>Profile</a>
-                                            <a class="nav-link" href={% static "account-billing.html" %}>Billing</a>
-                                            <a class="nav-link" href={% static "account-security.html" %}>Security</a>
-                                            <a class="nav-link" href={% static "account-notifications.html" %}>Notifications</a>
+                                            <a class="nav-link" href={% static "pages/account-profile.html" %}>Profile</a>
+                                            <a class="nav-link" href={% static "pages/account-billing.html" %}>Billing</a>
+                                            <a class="nav-link" href={% static "pages/account-security.html" %}>Security</a>
+                                            <a class="nav-link" href={% static "pages/account-notifications.html" %}>Notifications</a>
                                         </nav>
                                     </div>
                                     <!-- Nested Sidenav Accordion (Pages -> Authentication)-->
@@ -281,9 +281,9 @@
                                             </a>
                                             <div class="collapse" id="pagesCollapseAuthBasic" data-bs-parent="#accordionSidenavPagesAuth">
                                                 <nav class="sidenav-menu-nested nav">
-                                                    <a class="nav-link" href={% static "auth-login-basic.html" %}>Login</a>
-                                                    <a class="nav-link" href={% static "auth-register-basic.html" %}>Register</a>
-                                                    <a class="nav-link" href={% static "auth-password-basic.html" %}>Forgot Password</a>
+                                                    <a class="nav-link" href={% static "pages/auth-login-basic.html" %}>Login</a>
+                                                    <a class="nav-link" href={% static "pages/auth-register-basic.html" %}>Register</a>
+                                                    <a class="nav-link" href={% static "pages/auth-password-basic.html" %}>Forgot Password</a>
                                                 </nav>
                                             </div>
                                             <!-- Nested Sidenav Accordion (Pages -> Authentication -> Social)-->
@@ -293,9 +293,9 @@
                                             </a>
                                             <div class="collapse" id="pagesCollapseAuthSocial" data-bs-parent="#accordionSidenavPagesAuth">
                                                 <nav class="sidenav-menu-nested nav">
-                                                    <a class="nav-link" href={% static "auth-login-social.html" %}>Login</a>
-                                                    <a class="nav-link" href={% static "auth-register-social.html" %}>Register</a>
-                                                    <a class="nav-link" href={% static "auth-password-social.html" %}>Forgot Password</a>
+                                                    <a class="nav-link" href={% static "pages/auth-login-social.html" %}>Login</a>
+                                                    <a class="nav-link" href={% static "pages/auth-register-social.html" %}>Register</a>
+                                                    <a class="nav-link" href={% static "pages/auth-password-social.html" %}>Forgot Password</a>
                                                 </nav>
                                             </div>
                                         </nav>
@@ -307,18 +307,18 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseError" data-bs-parent="#accordionSidenavPagesMenu">
                                         <nav class="sidenav-menu-nested nav">
-                                            <a class="nav-link" href={% static "error-400.html" %}>400 Error</a>
-                                            <a class="nav-link" href={% static "error-401.html" %}>401 Error</a>
-                                            <a class="nav-link" href={% static "error-403.html" %}>403 Error</a>
-                                            <a class="nav-link" href={% static "error-404-1.html" %}>404 Error 1</a>
-                                            <a class="nav-link" href={% static "error-404-2.html" %}>404 Error 2</a>
-                                            <a class="nav-link" href={% static "error-500.html" %}>500 Error</a>
-                                            <a class="nav-link" href={% static "error-503.html" %}>503 Error</a>
-                                            <a class="nav-link" href={% static "error-504.html" %}>504 Error</a>
+                                            <a class="nav-link" href={% static "pages/error-400.html" %}>400 Error</a>
+                                            <a class="nav-link" href={% static "pages/error-401.html" %}>401 Error</a>
+                                            <a class="nav-link" href={% static "pages/error-403.html" %}>403 Error</a>
+                                            <a class="nav-link" href={% static "pages/error-404-1.html" %}>404 Error 1</a>
+                                            <a class="nav-link" href={% static "pages/error-404-2.html" %}>404 Error 2</a>
+                                            <a class="nav-link" href={% static "pages/error-500.html" %}>500 Error</a>
+                                            <a class="nav-link" href={% static "pages/error-503.html" %}>503 Error</a>
+                                            <a class="nav-link" href={% static "pages/error-504.html" %}>504 Error</a>
                                         </nav>
                                     </div>
-                                    <a class="nav-link" href={% static "pricing.html" %}>Pricing</a>
-                                    <a class="nav-link" href={% static "invoice.html" %}>Invoice</a>
+                                    <a class="nav-link" href={% static "pages/pricing.html" %}>Pricing</a>
+                                    <a class="nav-link" href={% static "pages/invoice.html" %}>Invoice</a>
                                 </nav>
                             </div>
                             <!-- Sidenav Accordion (Applications)-->
@@ -336,10 +336,10 @@
                                     </a>
                                     <div class="collapse" id="appsCollapseKnowledgeBase" data-bs-parent="#accordionSidenavAppsMenu">
                                         <nav class="sidenav-menu-nested nav">
-                                            <a class="nav-link" href={% static "knowledge-base-home-1.html" %}>Home 1</a>
-                                            <a class="nav-link" href={% static "knowledge-base-home-2.html" %}>Home 2</a>
-                                            <a class="nav-link" href={% static "knowledge-base-category.html" %}>Category</a>
-                                            <a class="nav-link" href={% static "knowledge-base-article.html" %}>Article</a>
+                                            <a class="nav-link" href={% static "pages/knowledge-base-home-1.html" %}>Home 1</a>
+                                            <a class="nav-link" href={% static "pages/knowledge-base-home-2.html" %}>Home 2</a>
+                                            <a class="nav-link" href={% static "pages/knowledge-base-category.html" %}>Category</a>
+                                            <a class="nav-link" href={% static "pages/knowledge-base-article.html" %}>Article</a>
                                         </nav>
                                     </div>
                                     <!-- Nested Sidenav Accordion (Apps -> User Management)-->
@@ -349,11 +349,11 @@
                                     </a>
                                     <div class="collapse" id="appsCollapseUserManagement" data-bs-parent="#accordionSidenavAppsMenu">
                                         <nav class="sidenav-menu-nested nav">
-                                            <a class="nav-link" href={% static "user-management-list.html" %}>Users List</a>
-                                            <a class="nav-link" href={% static "user-management-edit-user.html" %}>Edit User</a>
-                                            <a class="nav-link" href={% static "user-management-add-user.html" %}>Add User</a>
-                                            <a class="nav-link" href={% static "user-management-groups-list.html" %}>Groups List</a>
-                                            <a class="nav-link" href={% static "user-management-org-details.html" %}>Organization Details</a>
+                                            <a class="nav-link" href={% static "pages/user-management-list.html" %}>Users List</a>
+                                            <a class="nav-link" href={% static "pages/user-management-edit-user.html" %}>Edit User</a>
+                                            <a class="nav-link" href={% static "pages/user-management-add-user.html" %}>Add User</a>
+                                            <a class="nav-link" href={% static "pages/user-management-groups-list.html" %}>Groups List</a>
+                                            <a class="nav-link" href={% static "pages/user-management-org-details.html" %}>Organization Details</a>
                                         </nav>
                                     </div>
                                     <!-- Nested Sidenav Accordion (Apps -> Posts Management)-->
@@ -363,10 +363,10 @@
                                     </a>
                                     <div class="collapse" id="appsCollapsePostsManagement" data-bs-parent="#accordionSidenavAppsMenu">
                                         <nav class="sidenav-menu-nested nav">
-                                            <a class="nav-link" href={% static "blog-management-posts-list.html" %}>Posts List</a>
-                                            <a class="nav-link" href={% static "blog-management-create-post.html" %}>Create Post</a>
-                                            <a class="nav-link" href={% static "blog-management-edit-post.html" %}>Edit Post</a>
-                                            <a class="nav-link" href={% static "blog-management-posts-admin.html" %}>Posts Admin</a>
+                                            <a class="nav-link" href={% static "pages/blog-management-posts-list.html" %}>Posts List</a>
+                                            <a class="nav-link" href={% static "pages/blog-management-create-post.html" %}>Create Post</a>
+                                            <a class="nav-link" href={% static "pages/blog-management-edit-post.html" %}>Edit Post</a>
+                                            <a class="nav-link" href={% static "pages/blog-management-posts-admin.html" %}>Posts Admin</a>
                                         </nav>
                                     </div>
                                 </nav>
@@ -379,8 +379,8 @@
                             </a>
                             <div class="collapse" id="collapseFlows" data-bs-parent="#accordionSidenav">
                                 <nav class="sidenav-menu-nested nav">
-                                    <a class="nav-link" href={% static "multi-tenant-select.html" %}>Multi-Tenant Registration</a>
-                                    <a class="nav-link" href={% static "wizard.html" %}>Wizard</a>
+                                    <a class="nav-link" href={% static "pages/multi-tenant-select.html" %}>Multi-Tenant Registration</a>
+                                    <a class="nav-link" href={% static "pages/wizard.html" %}>Wizard</a>
                                 </nav>
                             </div>
                             <!-- Sidenav Heading (UI Toolkit)-->
@@ -400,9 +400,9 @@
                                     </a>
                                     <div class="collapse" id="collapseLayoutSidenavVariations" data-bs-parent="#accordionSidenavLayout">
                                         <nav class="sidenav-menu-nested nav">
-                                            <a class="nav-link" href={% static "layout-static.html" %}>Static Sidenav</a>
-                                            <a class="nav-link" href={% static "layout-dark.html" %}>Dark Sidenav</a>
-                                            <a class="nav-link" href={% static "layout-rtl.html" %}>RTL Layout</a>
+                                            <a class="nav-link" href={% static "pages/layout-static.html" %}>Static Sidenav</a>
+                                            <a class="nav-link" href={% static "pages/layout-dark.html" %}>Dark Sidenav</a>
+                                            <a class="nav-link" href={% static "pages/layout-rtl.html" %}>RTL Layout</a>
                                         </nav>
                                     </div>
                                     <!-- Nested Sidenav Accordion (Layout -> Container Options)-->
@@ -412,8 +412,8 @@
                                     </a>
                                     <div class="collapse" id="collapseLayoutContainers" data-bs-parent="#accordionSidenavLayout">
                                         <nav class="sidenav-menu-nested nav">
-                                            <a class="nav-link" href={% static "layout-boxed.html" %}>Boxed Layout</a>
-                                            <a class="nav-link" href={% static "layout-fluid.html" %}>Fluid Layout</a>
+                                            <a class="nav-link" href={% static "pages/layout-boxed.html" %}>Boxed Layout</a>
+                                            <a class="nav-link" href={% static "pages/layout-fluid.html" %}>Fluid Layout</a>
                                         </nav>
                                     </div>
                                     <!-- Nested Sidenav Accordion (Layout -> Page Headers)-->
@@ -423,11 +423,11 @@
                                     </a>
                                     <div class="collapse" id="collapseLayoutsPageHeaders" data-bs-parent="#accordionSidenavLayout">
                                         <nav class="sidenav-menu-nested nav">
-                                            <a class="nav-link" href={% static "header-simplified.html" %}>Simplified</a>
-                                            <a class="nav-link" href={% static "header-compact.html" %}>Compact</a>
-                                            <a class="nav-link" href={% static "header-overlap.html" %}>Content Overlap</a>
-                                            <a class="nav-link" href={% static "header-breadcrumbs.html" %}>Breadcrumbs</a>
-                                            <a class="nav-link" href={% static "header-light.html" %}>Light</a>
+                                            <a class="nav-link" href={% static "pages/header-simplified.html" %}>Simplified</a>
+                                            <a class="nav-link" href={% static "pages/header-compact.html" %}>Compact</a>
+                                            <a class="nav-link" href={% static "pages/header-overlap.html" %}>Content Overlap</a>
+                                            <a class="nav-link" href={% static "pages/header-breadcrumbs.html" %}>Breadcrumbs</a>
+                                            <a class="nav-link" href={% static "pages/header-light.html" %}>Light</a>
                                         </nav>
                                     </div>
                                     <!-- Nested Sidenav Accordion (Layout -> Starter Layouts)-->
@@ -437,8 +437,8 @@
                                     </a>
                                     <div class="collapse" id="collapseLayoutsStarterTemplates" data-bs-parent="#accordionSidenavLayout">
                                         <nav class="sidenav-menu-nested nav">
-                                            <a class="nav-link" href={% static "starter-default.html" %}>Default</a>
-                                            <a class="nav-link" href={% static "starter-minimal.html" %}>Minimal</a>
+                                            <a class="nav-link" href={% static "pages/starter-default.html" %}>Default</a>
+                                            <a class="nav-link" href={% static "pages/starter-minimal.html" %}>Minimal</a>
                                         </nav>
                                     </div>
                                 </nav>
@@ -451,26 +451,26 @@
                             </a>
                             <div class="collapse" id="collapseComponents" data-bs-parent="#accordionSidenav">
                                 <nav class="sidenav-menu-nested nav">
-                                    <a class="nav-link" href={% static "alerts.html" %}>Alerts</a>
-                                    <a class="nav-link" href={% static "avatars.html" %}>Avatars</a>
-                                    <a class="nav-link" href={% static "badges.html" %}>Badges</a>
-                                    <a class="nav-link" href={% static "buttons.html" %}>Buttons</a>
-                                    <a class="nav-link" href={% static "cards.html" %}>
+                                    <a class="nav-link" href={% static "pages/alerts.html" %}>Alerts</a>
+                                    <a class="nav-link" href={% static "pages/avatars.html" %}>Avatars</a>
+                                    <a class="nav-link" href={% static "pages/badges.html" %}>Badges</a>
+                                    <a class="nav-link" href={% static "pages/buttons.html" %}>Buttons</a>
+                                    <a class="nav-link" href={% static "pages/cards.html" %}>
                                         Cards
                                         <span class="badge bg-primary-soft text-primary ms-auto">Updated</span>
                                     </a>
-                                    <a class="nav-link" href={% static "dropdowns.html" %}>Dropdowns</a>
-                                    <a class="nav-link" href={% static "forms.html" %}>
+                                    <a class="nav-link" href={% static "pages/dropdowns.html" %}>Dropdowns</a>
+                                    <a class="nav-link" href={% static "pages/forms.html" %}>
                                         Forms
                                         <span class="badge bg-primary-soft text-primary ms-auto">Updated</span>
                                     </a>
-                                    <a class="nav-link" href={% static "modals.html" %}>Modals</a>
-                                    <a class="nav-link" href={% static "navigation.html" %}>Navigation</a>
-                                    <a class="nav-link" href={% static "progress.html" %}>Progress</a>
-                                    <a class="nav-link" href={% static "step.html" %}>Step</a>
-                                    <a class="nav-link" href={% static "timeline.html" %}>Timeline</a>
-                                    <a class="nav-link" href={% static "toasts.html" %}>Toasts</a>
-                                    <a class="nav-link" href={% static "tooltips.html" %}>Tooltips</a>
+                                    <a class="nav-link" href={% static "pages/modals.html" %}>Modals</a>
+                                    <a class="nav-link" href={% static "pages/navigation.html" %}>Navigation</a>
+                                    <a class="nav-link" href={% static "pages/progress.html" %}>Progress</a>
+                                    <a class="nav-link" href={% static "pages/step.html" %}>Step</a>
+                                    <a class="nav-link" href={% static "pages/timeline.html" %}>Timeline</a>
+                                    <a class="nav-link" href={% static "pages/toasts.html" %}>Toasts</a>
+                                    <a class="nav-link" href={% static "pages/tooltips.html" %}>Tooltips</a>
                                 </nav>
                             </div>
                             <!-- Sidenav Accordion (Utilities)-->
@@ -481,23 +481,23 @@
                             </a>
                             <div class="collapse" id="collapseUtilities" data-bs-parent="#accordionSidenav">
                                 <nav class="sidenav-menu-nested nav">
-                                    <a class="nav-link" href={% static "animations.html" %}>Animations</a>
-                                    <a class="nav-link" href={% static "background.html" %}>Background</a>
-                                    <a class="nav-link" href={% static "borders.html" %}>Borders</a>
-                                    <a class="nav-link" href={% static "lift.html" %}>Lift</a>
-                                    <a class="nav-link" href={% static "shadows.html" %}>Shadows</a>
-                                    <a class="nav-link" href={% static "typography.html" %}>Typography</a>
+                                    <a class="nav-link" href={% static "pages/animations.html" %}>Animations</a>
+                                    <a class="nav-link" href={% static "pages/background.html" %}>Background</a>
+                                    <a class="nav-link" href={% static "pages/borders.html" %}>Borders</a>
+                                    <a class="nav-link" href={% static "pages/lift.html" %}>Lift</a>
+                                    <a class="nav-link" href={% static "pages/shadows.html" %}>Shadows</a>
+                                    <a class="nav-link" href={% static "pages/typography.html" %}>Typography</a>
                                 </nav>
                             </div>
                             <!-- Sidenav Heading (Addons)-->
                             <div class="sidenav-menu-heading">Plugins</div>
                             <!-- Sidenav Link (Charts)-->
-                            <a class="nav-link" href={% static "charts.html" %}>
+                            <a class="nav-link" href={% static "pages/charts.html" %}>
                                 <div class="nav-link-icon"><i data-feather="bar-chart"></i></div>
                                 Charts
                             </a>
                             <!-- Sidenav Link (Tables)-->
-                            <a class="nav-link" href={% static "tables.html" %}>
+                            <a class="nav-link" href={% static "pages/tables.html" %}>
                                 <div class="nav-link-icon"><i data-feather="filter"></i></div>
                                 Tables
                             </a>
@@ -1322,6 +1322,6 @@
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src={% static "js/scripts.js" %}></script>
+        <script src={% static "pages/js/scripts.js" %}></script>
     </body>
 </html>
