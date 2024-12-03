@@ -26,6 +26,7 @@ urlpatterns = [
     path('screener_USA/', include('screener_daily_USA.urls')),
     path('auth_telegram_bot/', include('auth_telegram_bot.urls')),
     path('', views.index_html, name='index'),
+    path('contact_us', views.contact_us_html, name='contact_us'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
