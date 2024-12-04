@@ -19,7 +19,7 @@
             <!-- Sidenav Toggle Button-->
             <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 me-2 ms-lg-2 me-lg-0" id="sidebarToggle"><i data-feather="menu"></i></button>
             <!-- Navbar Brand-->
-            <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="#!">Stock Screener Pro</a>
+            <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="{% url 'index' %}">Stock Screener Pro</a>
             <!-- Navbar Search Input-->
             <form class="form-inline me-auto d-none d-lg-block me-3">
                 <div class="input-group input-group-joined input-group-solid">
@@ -53,7 +53,7 @@
                 </li>
                 <!-- Contact us Dropdown-->
                 <li class="nav-item dropdown no-caret d-none d-md-block me-3">
-                    <a class="nav-link dropdown-toggle" href="#!">
+                    <a class="nav-link dropdown-toggle" href="{% url 'contact_us' %}">
                         <div class="fw-500">Contact us</div>
                     <i class="fas fa-chevron-right dropdown-arrow"></i>
                     </a>
@@ -68,18 +68,18 @@
                             <!-- Sidenav Menu Heading (U.S. Stock Market)-->
                             <div class="sidenav-menu-heading">U.S. Stock Market</div>
                             <!-- Sidenav Accordion -->
-                            <a class="nav-link collapsed" href="#!">
+                            <a class="nav-link collapsed" href="{% url 'screener_daily_USA:screener' %}">
                                 <div class="nav-link-icon"><i data-feather="globe"></i></div>
                                 U.S. Stock Screener
                                 <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="sidenav-menu-heading">Stock Heatmap</div>
-                            <a class="nav-link collapsed" href="#!">
+                            <a class="nav-link collapsed" href="{% url 'screener_daily_USA:stock_heatmap_SPX' %}">
                                 <div class="nav-link-icon"><i data-feather="bar-chart"></i></div>
                                 S&P 500 Index
                                 <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <a class="nav-link collapsed" href="#!">
+                            <a class="nav-link collapsed" href="{% url 'screener_daily_USA:stock_heatmap_NDX' %}">
                                 <div class="nav-link-icon"><i data-feather="layout"></i></div>
                                 Nasdaq 100 Index
                                 <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>

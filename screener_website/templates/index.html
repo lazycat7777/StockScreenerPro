@@ -21,14 +21,14 @@
                     <!-- Navbar-->
                     <nav class="navbar navbar-marketing navbar-expand-lg bg-transparent navbar-dark fixed-top">
                         <div class="container px-5">
-                            <a class="navbar-brand text-white" href="#!">Stock Screener Pro</a>
+                            <a class="navbar-brand text-white" href="{% url 'index' %}">Stock Screener Pro</a>
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i data-feather="menu"></i></button>
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav ms-auto me-lg-5">
-                                    <li class="nav-item"><a class="nav-link" href="#!">Home</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#!">Contact us</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{% url 'contact_us' %}">Contact us</a></li>
                                 </ul>
-                                <a class="btn fw-500 ms-lg-4 btn-teal" href="https://shop.startbootstrap.com/sb-ui-kit-pro">
+                                <a class="btn fw-500 ms-lg-4 btn-teal" href="{% url 'screener_daily_USA:screener' %}">
                                     Log in
                                     <i class="ms-2" data-feather="arrow-right"></i>
                                 </a>
@@ -43,11 +43,10 @@
                                     <div class="col-xl-8 col-lg-10 text-center mb-4" data-aos="fade-up">
                                         <h1 class="page-header-ui-title">The Fastest Way to Find Winning Stocks</h1>
                                         <p class="page-header-ui-text mb-5">Advanced Stock Screener Designed for Success. Completely Free!</p>
-                                        <a class="btn btn-teal fw-500 me-2" href="#!">
+                                        <a class="btn btn-teal fw-500 me-2" href="{% url 'screener_daily_USA:screener' %}">
                                             Get Started
                                             <i class="ms-2" data-feather="arrow-right"></i>
                                         </a>
-                                        <a class="btn btn-link fw-500" href="#!">Learn More</a>
                                     </div>
                                 </div>
                             </div>
@@ -109,7 +108,7 @@
                                         <div class="col-md-6 mb-4">
                                             <h6>Technical Indicators & Volatility</h6>
                                             <p class="mb-2 small">Monitor <strong>ADR%</strong> to measure daily price fluctuations and market volatility, helping you assess risk and identify potential opportunities. Key indicators like <strong>SMA</strong> give you insights into trends and price changes over the week and month, so you stay informed and ahead of the market.</p>
-                                            <a class="small text-arrow-icon" href="#!">
+                                            <a class="small text-arrow-icon" href="{% url 'screener_daily_USA:screener' %}">
                                                 Learn More
                                                 <i data-feather="arrow-right"></i>
                                             </a>
@@ -117,7 +116,7 @@
                                         <div class="col-md-6 mb-4">
                                             <h6>Comprehensive Financial Analysis</h6>
                                             <p class="mb-2 small mb-0">Get an in-depth financial profile for each stock, including essential ratios like <strong>P/E</strong>, <strong>P/B</strong>, <strong>PEG</strong>, and <strong>P/S</strong>. Evaluate a company’s profitability with metrics such as <strong>operating margin</strong>, <strong>net margin</strong>, and <strong>ROE</strong> to understand its financial health.</p>
-                                            <a class="small text-arrow-icon" href="#!">
+                                            <a class="small text-arrow-icon" href="{% url 'screener_daily_USA:screener' %}">
                                                 Learn More
                                                 <i data-feather="arrow-right"></i>
                                             </a>
@@ -127,7 +126,7 @@
                                         <div class="col-md-6 mb-4">
                                             <h6>Dividend Yield & Sustainability</h6>
                                             <p class="mb-2 small mb-0">For income-focused investors, the screener provides tools to analyze <strong>dividend yield</strong>, <strong>payout ratio</strong>, and <strong>dividend history</strong>, helping you choose companies with strong, consistent returns and growth potential.</p>
-                                            <a class="small text-arrow-icon" href="#!">
+                                            <a class="small text-arrow-icon" href="{% url 'screener_daily_USA:screener' %}">
                                                 Learn More
                                                 <i data-feather="arrow-right"></i>
                                             </a>
@@ -135,7 +134,7 @@
                                         <div class="col-md-6 mb-4">
                                             <h6>Stock Heatmap</h6>
                                             <p class="small mb-0">The <strong>Stock Heatmap</strong> gives you a visual snapshot of the market, with color-coded price changes across sectors. It quickly shows high and low performers, integrating with technical indicators like <strong>ADR%</strong> and <strong>SMA</strong> to help you spot trends and market shifts at a glance!</p>
-                                            <a class="small text-arrow-icon" href="#!">
+                                            <a class="small text-arrow-icon" href="{% url 'screener_daily_USA:screener' %}">
                                                 Learn More
                                                 <i data-feather="arrow-right"></i>
                                             </a>
@@ -194,7 +193,7 @@
                                     <div class="badge bg-transparent-light rounded-pill badge-marketing mb-4">Get Started</div>
                                     <h2 class="text-white">Get Full Access to the Stock Screener Today!</h2>
                                     <p class="lead text-white-50 mb-5">Start tracking and analyzing stocks today with no cost involved. Save time, make informed decisions, and get full access to all features with the Stock Screener!</p>
-                                    <a class="btn btn-teal fw-500" href="#!">Get Started!</a>
+                                    <a class="btn btn-teal fw-500" href="{% url 'screener_daily_USA:screener' %}">Get Started!</a>
                                 </div>
                             </div>
                         </div>
@@ -237,7 +236,7 @@
                             </div>
                             <div class="row gx-5">
                                 <div class="col-lg-6 mb-lg-n10 mb-5 mb-lg-0 z-1">
-                                    <a class="card text-decoration-none h-100 lift" href="#!">
+                                    <a class="card text-decoration-none h-100 lift">
                                         <div class="card-body py-5">
                                             <div class="d-flex align-items-center">
                                                 <div class="icon-stack icon-stack-xl bg-primary text-white flex-shrink-0"><i data-feather="activity"></i></div>
@@ -250,7 +249,7 @@
                                     </a>
                                 </div>
                                 <div class="col-lg-6 mb-lg-n10 z-1">
-                                    <a class="card text-decoration-none h-100 lift" href="#!">
+                                    <a class="card text-decoration-none h-100 lift">
                                         <div class="card-body py-5">
                                             <div class="d-flex align-items-center">
                                                 <div class="icon-stack icon-stack-xl bg-secondary text-white flex-shrink-0"><i data-feather="code"></i></div>
@@ -277,7 +276,7 @@
                                     <p class="lead mb-5 mb-lg-0 text-gray-500">Start your journey.</p>
                                 </div>
                                 <div class="col-lg-6 text-lg-end">
-                                    <a class="btn btn-white fw-500 my-2 shadow" href="#!">Get Started!</a>
+                                    <a class="btn btn-white fw-500 my-2 shadow" href="{% url 'screener_daily_USA:screener' %}">Get Started!</a>
                                 </div>
                             </div>
                         </div>
