@@ -2,11 +2,11 @@ from django.shortcuts import render
 from .service import get_client_ip, is_ip_in_database, add_ip_to_database
 
 # Переход в регистрацию через телеграм бота
-def Telegram_Login_View(request):
+def to_telegram_bot_html(request):
     return render(request, 'to_telegram_bot.html')
 
 # Добавление IP в базу данных
-def grant_access(request):
+def telegram_bot_access_html(request):
     client_ip = get_client_ip(request)
 
     if not is_ip_in_database(client_ip):

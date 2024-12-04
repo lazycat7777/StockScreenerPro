@@ -2,6 +2,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('to_telegram_bot/', views.Telegram_Login_View, name='to_telegram_bot'),
-    path('telegram_bot_access/', views.grant_access, name='telegram_bot_access'),
+    path('to_telegram_bot/', views.to_telegram_bot_html, name='to_telegram_bot'),
+    path('telegram_bot_access/', views.telegram_bot_access_html, name='telegram_bot_access'),
 ]
