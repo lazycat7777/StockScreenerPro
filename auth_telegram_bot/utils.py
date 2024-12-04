@@ -6,7 +6,7 @@ def ip_access_required(view_func):
         client_ip = get_client_ip(request)
         # Проверка IP-адреса
         if not IPAccess.objects.filter(ip_address=client_ip).exists():
-            return redirect('to_telegram_bot') # перенаправление
+            return redirect('auth_telegram_bot:to_telegram_bot') # перенаправление
         return view_func(request, *args, **kwargs)
 
     return _wrapped_view
