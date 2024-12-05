@@ -2,12 +2,13 @@
 services:
   webapp:
     container_name: webapp
-    build: ./  
+    build:
+      context: ./backend
     ports:
       - "18080:18080"  
     volumes:
-      - ./:/app  
-      - ./static:/app/static
+      - ./backend:/app  
+      - ./backend/static:/app/static
     env_file:
       - ./.env
     command: >
@@ -44,10 +45,11 @@ services:
       - webapp_network
 
   worker:
-    build: ./  
+    build:
+      context: ./backend
     hostname: worker
     volumes:
-      - ./:/app
+      - ./backend:/app
     env_file:
       - ./.env
     depends_on:
@@ -70,10 +72,11 @@ services:
       - webapp_network
 
   beat:
-    build: ./  
+    build:
+      context: ./backend
     hostname: beat
     volumes:
-      - ./:/app
+      - ./backend:/app
     env_file:
       - ./.env
     depends_on:
@@ -89,12 +92,13 @@ services:
       - webapp_network
 
   flower:
-    build: ./  
+    build:
+      context: ./backend
     hostname: flower
     ports:
       - "5555:5555"
     volumes:
-      - ./:/app
+      - ./backend:/app
     env_file:
       - ./.env      
     depends_on:
@@ -118,6 +122,22 @@ services:
     command: python main.py
     networks:
       - webapp_network
+
+  # nginx:
+  #   build: ./nginx
+  #   container_name: nginx
+  #   ports:
+  #     - 80:80
+  #     - 443:443
+  #   volumes:
+  #     - ./backend/static:/static 
+  #     - ./media:/media
+  #     - ./uploads:/uploads
+  #     - ./nginx/:/etc/nginx/conf.d/:ro
+  #   depends_on:
+  #     - webapp
+  #   networks:
+  #     - webapp_network
 
 volumes:
   postgres_data:
