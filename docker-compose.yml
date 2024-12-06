@@ -8,7 +8,7 @@ services:
       - "18080:18080"  
     volumes:
       - ./backend:/app  
-      - ./backend/static:/app/static
+      # - ./backend/static:/app/static
     env_file:
       - ./.env
     command: >
@@ -16,7 +16,8 @@ services:
       source /ctr-py-venv/bin/activate &&
       python manage.py makemigrations &&
       python manage.py migrate &&
-      python manage.py runserver 0.0.0.0:18080"
+      python manage.py collectstatic --noinput &&
+      gunicorn screener_website.wsgi:application --bind 0.0.0.0:18080"
     depends_on:
       - database
     networks:
@@ -123,21 +124,18 @@ services:
     networks:
       - webapp_network
 
-  # nginx:
-  #   build: ./nginx
-  #   container_name: nginx
-  #   ports:
-  #     - 80:80
-  #     - 443:443
-  #   volumes:
-  #     - ./backend/static:/static 
-  #     - ./media:/media
-  #     - ./uploads:/uploads
-  #     - ./nginx/:/etc/nginx/conf.d/:ro
-  #   depends_on:
-  #     - webapp
-  #   networks:
-  #     - webapp_network
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./backend/staticfiles:/static:ro 
+      - ./backend/images:/media:ro    
+    depends_on:
+      - webapp
+    networks:
+      - webapp_network
 
 volumes:
   postgres_data:
