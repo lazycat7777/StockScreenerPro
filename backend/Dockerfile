@@ -12,7 +12,7 @@ COPY ./requirements.txt ./
 RUN bash -c "source /ctr-py-venv/bin/activate && \
     pip install --upgrade pip && \
     pip install --upgrade setuptools && \
-    pip install -r requirements.txt"
+    pip install --no-cache-dir -r requirements.txt"
 
 # postgresql
 RUN apt-get update && apt-get install -y postgresql-client libpq-dev
