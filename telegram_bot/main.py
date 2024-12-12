@@ -7,7 +7,7 @@ from telebot import types
 load_dotenv()
 api_token = os.environ.get('TELEGRAM_BOT_TOKEN')
 channels = ['@screener_web_eng', '@screener_web_ru']  # Список каналов
-custom_link = "http://127.0.0.1:18080/auth_telegram_bot/telegram_bot_access/"  # Ссылка, которая ведет на авторизацию
+custom_link = "https://stock-screener-pro.ru/auth_telegram_bot/telegram_bot_access/"  # Ссылка, которая ведет на авторизацию
 
 # Инициализация бота
 bot = telebot.TeleBot(api_token)
