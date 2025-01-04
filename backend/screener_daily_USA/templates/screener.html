@@ -14,8 +14,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
     
         <!-- Стили для AG Grid -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-grid.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-theme-quartz.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community@32.3.3/styles/ag-grid.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community@32.3.3/styles/ag-theme-quartz.css">
         
         <!-- Стили только для этой страницы -->
         <style>
@@ -35,7 +35,7 @@
             }
         </style> 
     
-        <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/ag-grid-community@32.3.3/dist/ag-grid-community.min.js"></script>
         <!-- Yandex.Metrika counter -->
         <script type="text/javascript" >
             (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -541,9 +541,6 @@
                                                 
                                                             // Функция обновления символа в виджете
                                                             updateTradingViewSymbol(params.value);
-
-                                                            // После изменения размеров вызовем подгонку ширины столбцов
-                                                            window.gridApi.sizeColumnsToFit();
                                                         });
                                                         return button;
                                                     }
@@ -739,8 +736,6 @@
                                                         ["quick_filter_1", "quick_filter_2", "quick_filter_3", "quick_filter_4", "quick_filter_5", "quick_filter_6"],
                                                         false
                                                     );
-
-                                                    gridApi.sizeColumnsToFit(); // Подгоняем ширину столбцов по доступному пространству
                                                 }
                                             };
 
@@ -860,9 +855,6 @@
                                             
                                                 // Изменяем ширину chartSection
                                                 chartSection.style.width = chartSectionWidth;
-
-                                                // После изменения размеров вызовем подгонку ширины столбцов
-                                                window.gridApi.sizeColumnsToFit();
                                             });
 
                                             // Функция для обновления виджетов TradingView по символу

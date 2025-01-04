@@ -5,9 +5,9 @@ services:
     build:
       context: ./backend
     ports:
-      - "18080:18080"  
+      - "18080:18080"
     volumes:
-      - app_data:/app  
+      - app_data:/app
       - static_data:/app/static
     env_file:
       - ./.env
@@ -101,7 +101,7 @@ services:
     volumes:
       - app_data:/app
     env_file:
-      - ./.env      
+      - ./.env
     depends_on:
       - webapp
       - redis
@@ -114,50 +114,62 @@ services:
       - webapp_network
 
   telegram_bot:
-    build: ./telegram_bot  
+    build: ./telegram_bot
     container_name: telegram_bot
     volumes:
       - ./telegram_bot:/app
     env_file:
-      - ./.env      
+      - ./.env
     command: python main.py
     networks:
       - webapp_network
 
+  # for pruduction only
   nginx:
-    build: ./nginx
+    image: jonasal/nginx-certbot:5.4.0-nginx1.27.3
     container_name: nginx
+    restart: unless-stopped
+    env_file:
+      - ./.env
     ports:
-      - "80:80"
-      - "443:443"
+      - 80:80
+      - 443:443
     volumes:
-      - ./nginx/certbot/conf:/etc/letsencrypt
-      - ./nginx/certbot/www:/var/www/certbot
-      - ./nginx:/etc/nginx/conf.d:ro
+      - nginx_secrets:/etc/letsencrypt
+      - ./user_conf.d:/etc/nginx/user_conf.d
       - static_data:/app/static:ro
       - media_data:/app/media:ro
     depends_on:
       - webapp
-    command: >
-      sh -c "sleep 150 && nginx -g 'daemon off;'"
+      - redis
+      - worker
     networks:
       - webapp_network
 
-  certbot:
-    image: certbot/certbot
-    container_name: certbot
-    volumes:
-      - ./nginx/certbot/conf:/etc/letsencrypt
-      - ./nginx/certbot/www:/var/www/certbot
-    entrypoint: "sh -c 'trap exit TERM; while :; do sleep 12h & wait $!; certbot renew; done'"
-    networks:
-      - webapp_network
+  # for tests only
+  # nginx:
+  #   build: ./nginx
+  #   container_name: nginx
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - ./nginx:/etc/nginx/conf.d:ro
+  #     - static_data:/app/static:ro
+  #     - media_data:/app/media:ro
+  #   depends_on:
+  #     - webapp
+  #   command: >
+  #     sh -c "sleep 150 && nginx -g 'daemon off;'"
+  #   networks:
+  #     - webapp_network
 
 volumes:
   app_data:
   postgres_data:
   static_data:
   media_data:
+  nginx_secrets:
 
 networks:
   webapp_network:
