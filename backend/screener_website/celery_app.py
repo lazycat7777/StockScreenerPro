@@ -8,6 +8,14 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'screener_website.settings')
 app = Celery('screener_website')
 app.config_from_object('django.conf:settings', namespace='CELERY')
 app.conf.broker_url = settings.CELERY_BROKER_URL
+
+app.conf.broker_transport_options = {
+    'visibility_timeout': 3600,
+    'retry_on_timeout': True,
+    'socket_timeout': 30,
+    'socket_connect_timeout': 30,
+}
+
 app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
