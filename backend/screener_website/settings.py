@@ -147,22 +147,28 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 DATABASE_ROUTERS = ['screener_daily_USA.router.AppRouter',]
 
 # redis
-REDIS_HOST = 'redis'
-REDIS_PORT = '6379'
+REDIS_HOST = os.environ.get('REDIS_HOST')
+REDIS_PORT = os.environ.get('REDIS_PORT')
+REDIS_PASSWORD = os.environ.get('REDIS_PASSWORD')
 
 # celery
-CELERY_BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
-CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+CELERY_BROKER_URL = f'redis://:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/0'
+CELERY_RESULT_BACKEND = f'redis://:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/0'
 CELERY_TIMEZONE = 'UTC'
 CELERY_ENABLE_UTC = True
 
-# cache
+# django-cachalot
+CACHALOT_ENABLED = True
+CACHALOT_TIMEOUT = 3600
 CACHALOT_DATABASES = ['default']
 
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://redis:6379/1',
+        'LOCATION': f'redis://:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/1',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        },
     }
 }
 
@@ -183,6 +189,14 @@ CACHES = {
 #             'handlers': ['console'],
 #             'level': 'DEBUG',
 #             'propagate': True,
+#         },
+#         'django_redis.cache': {
+#             'handlers': ['console'],
+#             'level': 'DEBUG',
+#         },
+#         'cachalot': {
+#             'handlers': ['console'],
+#             'level': 'DEBUG',
 #         },
 #     },
 # }
